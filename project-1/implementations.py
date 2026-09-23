@@ -18,7 +18,7 @@ import numpy as np
 
 
 # ---------------------------------------------------------------------------
-# Shared helpers  (owner: person A for the MSE pair, person C for the logistic pair)
+# Shared helpers  (MSE pair: Rania -- logistic pair: Yahya)
 # ---------------------------------------------------------------------------
 
 
@@ -65,7 +65,7 @@ def compute_logistic_gradient(y, tx, w):
 
 
 # ---------------------------------------------------------------------------
-# 1. Linear regression -- gradient descent            (owner: A)
+# 1. Linear regression -- gradient descent            (owner: Rania)
 # ---------------------------------------------------------------------------
 
 
@@ -86,7 +86,7 @@ def mean_squared_error_gd(y, tx, initial_w, max_iters, gamma):
 
 
 # ---------------------------------------------------------------------------
-# 2. Linear regression -- stochastic gradient descent  (owner: A)
+# 2. Linear regression -- stochastic gradient descent  (owner: Rania)
 # ---------------------------------------------------------------------------
 
 
@@ -109,7 +109,7 @@ def mean_squared_error_sgd(y, tx, initial_w, max_iters, gamma):
 
 
 # ---------------------------------------------------------------------------
-# 3. Least squares -- normal equations                 (owner: B)
+# 3. Least squares -- normal equations                 (owner: Sara)
 # ---------------------------------------------------------------------------
 
 
@@ -126,7 +126,7 @@ def least_squares(y, tx):
 
 
 # ---------------------------------------------------------------------------
-# 4. Ridge regression -- normal equations              (owner: B)
+# 4. Ridge regression -- normal equations              (owner: Sara)
 # ---------------------------------------------------------------------------
 
 
@@ -145,7 +145,7 @@ def ridge_regression(y, tx, lambda_):
 
 
 # ---------------------------------------------------------------------------
-# 5. Logistic regression -- gradient descent           (owner: C)
+# 5. Logistic regression -- gradient descent           (owner: Yahya)
 # ---------------------------------------------------------------------------
 
 
@@ -166,7 +166,7 @@ def logistic_regression(y, tx, initial_w, max_iters, gamma):
 
 
 # ---------------------------------------------------------------------------
-# 6. Regularized logistic regression -- gradient descent  (owner: C)
+# 6. Regularized logistic regression -- gradient descent  (owner: Yahya)
 # ---------------------------------------------------------------------------
 
 

@@ -7,13 +7,15 @@ project-1/data/*
 
 # CSVs are data by default, except the small shared tables we DO track
 *.csv
-!project-1/results/*.csv
-!project-1/notebooks/feature_summary.csv
+!project-1/notebooks/*.csv
 
-# ---- Model outputs / submissions ----
+# ---- Model outputs ----
 submissions/
 *.pkl
 weights/
+
+# ---- Files staged for deletion (not part of the project) ----
+_to_delete/
 
 # ---- Python ----
 __pycache__/
