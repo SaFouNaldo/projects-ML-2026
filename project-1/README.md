@@ -1,6 +1,6 @@
 # Project 1 -- Heart attack prediction (MICHD)
 
-Team **Saraya** -- Yahya Skalli, Sara El Harti, Rania El Kasmi
+Team **F1-Cardiaque** -- Yahya Skalli, Sara El Harti, Rania El Kasmi
 EPFL CS-433 Machine Learning, Fall 2026. Deadline: 29 October 2026, 16:00.
 
 ## Getting the data
