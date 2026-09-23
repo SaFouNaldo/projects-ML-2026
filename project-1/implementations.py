@@ -148,7 +148,12 @@ def ridge_regression(y, tx, lambda_):
 # 5. Logistic regression -- gradient descent           (owner: Yahya)
 # ---------------------------------------------------------------------------
 
-
+def sigmoid(z):
+    """Numerically stable logistic sigmoid """
+    z = np.asarray(z, dtype=float)
+    e = np.exp(-np.abs(z))
+    return np.where(z >= 0, 1 / (1 + e), e / (1 + e))
+    
 def logistic_regression(y, tx, initial_w, max_iters, gamma):
     """Logistic regression using gradient descent.
 
@@ -162,7 +167,16 @@ def logistic_regression(y, tx, initial_w, max_iters, gamma):
     Returns:
         (w, loss): last weight vector and its logistic loss.
     """
-    raise NotImplementedError
+    w = initial_w
+    (N, _) = tx.shape
+    for _ in range(max_iters):
+        gradient = (1/N) * (tx.T @ (sigmoid(tx @ w) - y))
+        # UPDATE
+        w = w - gamma * gradient
+    z = tx @ w
+    # preventing overflow
+    loss = np.mean(np.logaddexp(0, z) - y * z)
+    return (w, loss)
 
 
 # ---------------------------------------------------------------------------
@@ -183,4 +197,13 @@ def reg_logistic_regression(y, tx, lambda_, initial_w, max_iters, gamma):
     Returns:
         (w, loss): last weight vector and its logistic loss without the penalty.
     """
-    raise NotImplementedError
+    w = initial_w
+    (N, _) = tx.shape
+    for _ in range(max_iters):
+        gradient = (1/N) * (tx.T @ (sigmoid(tx @ w) - y)) + 2 * lambda_ * w 
+        # UPDATE
+        w = w - gamma * gradient
+    z = tx @ w
+    # preventing overflow
+    loss = np.mean(np.logaddexp(0, z) - y * z)
+    return (w, loss)
