@@ -1,0 +1,44 @@
+# ---- Data (never commit: too big, and provided by the course) ----
+project-1/data/*
+!project-1/data/.gitkeep
+*.zip
+*.npy
+*.npz
+
+# CSVs are data by default, except the small shared tables we DO track
+*.csv
+!project-1/results/*.csv
+!project-1/notebooks/feature_summary.csv
+
+# ---- Model outputs / submissions ----
+submissions/
+*.pkl
+weights/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# ---- LaTeX ----
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+
+# ---- Editors / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
