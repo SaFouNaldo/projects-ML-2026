@@ -1,0 +1,1635 @@
+{
+ "n_train": 328135,
+ "n_test": 109379,
+ "n_features": 175,
+ "names": [
+  "GENHLTH",
+  "PHYSHLTH",
+  "MENTHLTH",
+  "POORHLTH",
+  "HLTHPLN1",
+  "PERSDOC2",
+  "MEDCOST",
+  "CHECKUP1",
+  "BPHIGH4",
+  "BPMEDS",
+  "BLOODCHO",
+  "CHOLCHK",
+  "TOLDHI2",
+  "ASTHMA3",
+  "CHCSCNCR",
+  "CHCOCNCR",
+  "CHCCOPD1",
+  "HAVARTH3",
+  "ADDEPEV2",
+  "CHCKIDNY",
+  "DIABETE3",
+  "SEX",
+  "MARITAL",
+  "EDUCA",
+  "RENTHOM1",
+  "VETERAN3",
+  "EMPLOY1",
+  "CHILDREN",
+  "INCOME2",
+  "INTERNET",
+  "WEIGHT2",
+  "HEIGHT3",
+  "QLACTLM2",
+  "USEEQUIP",
+  "BLIND",
+  "DECIDE",
+  "DIFFWALK",
+  "DIFFDRES",
+  "DIFFALON",
+  "SMOKE100",
+  "SMOKDAY2",
+  "LASTSMK2",
+  "USENOW3",
+  "ALCDAY5",
+  "AVEDRNK2",
+  "DRNK3GE5",
+  "MAXDRNKS",
+  "FRUITJU1",
+  "FRUIT1",
+  "FVBEANS",
+  "FVGREEN",
+  "FVORANG",
+  "VEGETAB1",
+  "EXERANY2",
+  "EXRACT11",
+  "EXEROFT1",
+  "EXRACT21",
+  "EXEROFT2",
+  "STRENGTH",
+  "LMTJOIN3",
+  "ARTHDIS2",
+  "ARTHSOCL",
+  "JOINPAIN",
+  "SEATBELT",
+  "FLUSHOT6",
+  "IMFVPLAC",
+  "PNEUVAC3",
+  "HIVTST6",
+  "WHRTST10",
+  "CAREGIV1",
+  "CIMEMLOS",
+  "SXORIENT",
+  "TRNSGNDR",
+  "_CHOLCHK",
+  "_PRACE1",
+  "_MRACE1",
+  "_HISPANC",
+  "_RACE",
+  "_RACEG21",
+  "_RACEGR3",
+  "_RACE_G1",
+  "_AGE65YR",
+  "_AGE80",
+  "_AGE_G",
+  "_BMI5",
+  "_EDUCAG",
+  "_SMOKER3",
+  "DRNKANY5",
+  "_RFBING5",
+  "_DRNKWEK",
+  "_MISFRTN",
+  "_MISVEGN",
+  "_FRTRESP",
+  "_FRUTSUM",
+  "_VEGESUM",
+  "_FRT16",
+  "_VEG23",
+  "_VEGETEX",
+  "METVL11_",
+  "METVL21_",
+  "FC60_",
+  "ACTIN11_",
+  "ACTIN21_",
+  "PADUR1_",
+  "PADUR2_",
+  "PAFREQ1_",
+  "_MINAC11",
+  "_MINAC21",
+  "STRFREQ_",
+  "PAMIN11_",
+  "PAMIN21_",
+  "PA1MIN_",
+  "PAVIG11_",
+  "PAVIG21_",
+  "PA1VIGM_",
+  "_PACAT1",
+  "_PA30021",
+  "_PASTAE1",
+  "_LMTACT1",
+  "_LMTWRK1",
+  "_LMTSCL1",
+  "CHOLCHK__isna",
+  "TOLDHI2__isna",
+  "INCOME2__isna",
+  "WEIGHT2__isna",
+  "SMOKDAY2__isna",
+  "LASTSMK2__isna",
+  "FRUITJU1__isna",
+  "FRUIT1__isna",
+  "FVBEANS__isna",
+  "FVGREEN__isna",
+  "FVORANG__isna",
+  "VEGETAB1__isna",
+  "EXERANY2__isna",
+  "EXRACT11__isna",
+  "EXEROFT1__isna",
+  "EXRACT21__isna",
+  "EXEROFT2__isna",
+  "STRENGTH__isna",
+  "LMTJOIN3__isna",
+  "ARTHDIS2__isna",
+  "ARTHSOCL__isna",
+  "SEATBELT__isna",
+  "FLUSHOT6__isna",
+  "IMFVPLAC__isna",
+  "PNEUVAC3__isna",
+  "HIVTST6__isna",
+  "WHRTST10__isna",
+  "CAREGIV1__isna",
+  "CIMEMLOS__isna",
+  "SXORIENT__isna",
+  "TRNSGNDR__isna",
+  "_BMI5__isna",
+  "_RFBING5__isna",
+  "_DRNKWEK__isna",
+  "_FRUTSUM__isna",
+  "_VEGESUM__isna",
+  "METVL11___isna",
+  "METVL21___isna",
+  "ACTIN11___isna",
+  "ACTIN21___isna",
+  "PADUR1___isna",
+  "PADUR2___isna",
+  "PAFREQ1___isna",
+  "_MINAC11__isna",
+  "_MINAC21__isna",
+  "STRFREQ___isna",
+  "PAMIN11___isna",
+  "PAMIN21___isna",
+  "PA1MIN___isna",
+  "PAVIG11___isna",
+  "PAVIG21___isna",
+  "PA1VIGM___isna",
+  "_PACAT1__isna",
+  "_PASTAE1__isna"
+ ],
+ "types": {
+  "GENHLTH": "ordinal",
+  "PHYSHLTH": "ordinal",
+  "MENTHLTH": "ordinal",
+  "POORHLTH": "ordinal",
+  "HLTHPLN1": "binary",
+  "PERSDOC2": "nominal",
+  "MEDCOST": "binary",
+  "CHECKUP1": "ordinal",
+  "BPHIGH4": "nominal",
+  "BPMEDS": "nominal",
+  "BLOODCHO": "binary",
+  "CHOLCHK": "nominal",
+  "TOLDHI2": "binary",
+  "ASTHMA3": "binary",
+  "CHCSCNCR": "binary",
+  "CHCOCNCR": "binary",
+  "CHCCOPD1": "binary",
+  "HAVARTH3": "binary",
+  "ADDEPEV2": "binary",
+  "CHCKIDNY": "binary",
+  "DIABETE3": "ordinal",
+  "SEX": "binary",
+  "MARITAL": "nominal",
+  "EDUCA": "ordinal",
+  "RENTHOM1": "nominal",
+  "VETERAN3": "binary",
+  "EMPLOY1": "nominal",
+  "CHILDREN": "ordinal",
+  "INCOME2": "ordinal",
+  "INTERNET": "binary",
+  "WEIGHT2": "continuous",
+  "HEIGHT3": "continuous",
+  "QLACTLM2": "binary",
+  "USEEQUIP": "binary",
+  "BLIND": "binary",
+  "DECIDE": "binary",
+  "DIFFWALK": "binary",
+  "DIFFDRES": "binary",
+  "DIFFALON": "binary",
+  "SMOKE100": "binary",
+  "SMOKDAY2": "nominal",
+  "LASTSMK2": "nominal",
+  "USENOW3": "nominal",
+  "ALCDAY5": "ordinal",
+  "AVEDRNK2": "continuous",
+  "DRNK3GE5": "continuous",
+  "MAXDRNKS": "continuous",
+  "FRUITJU1": "continuous",
+  "FRUIT1": "continuous",
+  "FVBEANS": "continuous",
+  "FVGREEN": "continuous",
+  "FVORANG": "continuous",
+  "VEGETAB1": "continuous",
+  "EXERANY2": "binary",
+  "EXRACT11": "nominal",
+  "EXEROFT1": "continuous",
+  "EXRACT21": "nominal",
+  "EXEROFT2": "continuous",
+  "STRENGTH": "continuous",
+  "LMTJOIN3": "binary",
+  "ARTHDIS2": "binary",
+  "ARTHSOCL": "nominal",
+  "JOINPAIN": "nominal",
+  "SEATBELT": "ordinal",
+  "FLUSHOT6": "binary",
+  "IMFVPLAC": "nominal",
+  "PNEUVAC3": "binary",
+  "HIVTST6": "binary",
+  "WHRTST10": "nominal",
+  "CAREGIV1": "binary",
+  "CIMEMLOS": "binary",
+  "SXORIENT": "nominal",
+  "TRNSGNDR": "nominal",
+  "_CHOLCHK": "nominal",
+  "_PRACE1": "nominal",
+  "_MRACE1": "nominal",
+  "_HISPANC": "binary",
+  "_RACE": "nominal",
+  "_RACEG21": "binary",
+  "_RACEGR3": "nominal",
+  "_RACE_G1": "nominal",
+  "_AGE65YR": "nominal",
+  "_AGE80": "continuous",
+  "_AGE_G": "ordinal",
+  "_BMI5": "continuous",
+  "_EDUCAG": "ordinal",
+  "_SMOKER3": "ordinal",
+  "DRNKANY5": "binary",
+  "_RFBING5": "binary",
+  "_DRNKWEK": "ordinal",
+  "_MISFRTN": "nominal",
+  "_MISVEGN": "nominal",
+  "_FRTRESP": "binary",
+  "_FRUTSUM": "ordinal",
+  "_VEGESUM": "ordinal",
+  "_FRT16": "binary",
+  "_VEG23": "binary",
+  "_VEGETEX": "nominal",
+  "METVL11_": "continuous",
+  "METVL21_": "continuous",
+  "FC60_": "continuous",
+  "ACTIN11_": "nominal",
+  "ACTIN21_": "nominal",
+  "PADUR1_": "continuous",
+  "PADUR2_": "continuous",
+  "PAFREQ1_": "continuous",
+  "_MINAC11": "continuous",
+  "_MINAC21": "continuous",
+  "STRFREQ_": "continuous",
+  "PAMIN11_": "continuous",
+  "PAMIN21_": "continuous",
+  "PA1MIN_": "continuous",
+  "PAVIG11_": "continuous",
+  "PAVIG21_": "continuous",
+  "PA1VIGM_": "continuous",
+  "_PACAT1": "ordinal",
+  "_PA30021": "binary",
+  "_PASTAE1": "binary",
+  "_LMTACT1": "nominal",
+  "_LMTWRK1": "nominal",
+  "_LMTSCL1": "nominal",
+  "CHOLCHK__isna": "binary",
+  "TOLDHI2__isna": "binary",
+  "INCOME2__isna": "binary",
+  "WEIGHT2__isna": "binary",
+  "SMOKDAY2__isna": "binary",
+  "LASTSMK2__isna": "binary",
+  "FRUITJU1__isna": "binary",
+  "FRUIT1__isna": "binary",
+  "FVBEANS__isna": "binary",
+  "FVGREEN__isna": "binary",
+  "FVORANG__isna": "binary",
+  "VEGETAB1__isna": "binary",
+  "EXERANY2__isna": "binary",
+  "EXRACT11__isna": "binary",
+  "EXEROFT1__isna": "binary",
+  "EXRACT21__isna": "binary",
+  "EXEROFT2__isna": "binary",
+  "STRENGTH__isna": "binary",
+  "LMTJOIN3__isna": "binary",
+  "ARTHDIS2__isna": "binary",
+  "ARTHSOCL__isna": "binary",
+  "SEATBELT__isna": "binary",
+  "FLUSHOT6__isna": "binary",
+  "IMFVPLAC__isna": "binary",
+  "PNEUVAC3__isna": "binary",
+  "HIVTST6__isna": "binary",
+  "WHRTST10__isna": "binary",
+  "CAREGIV1__isna": "binary",
+  "CIMEMLOS__isna": "binary",
+  "SXORIENT__isna": "binary",
+  "TRNSGNDR__isna": "binary",
+  "_BMI5__isna": "binary",
+  "_RFBING5__isna": "binary",
+  "_DRNKWEK__isna": "binary",
+  "_FRUTSUM__isna": "binary",
+  "_VEGESUM__isna": "binary",
+  "METVL11___isna": "binary",
+  "METVL21___isna": "binary",
+  "ACTIN11___isna": "binary",
+  "ACTIN21___isna": "binary",
+  "PADUR1___isna": "binary",
+  "PADUR2___isna": "binary",
+  "PAFREQ1___isna": "binary",
+  "_MINAC11__isna": "binary",
+  "_MINAC21__isna": "binary",
+  "STRFREQ___isna": "binary",
+  "PAMIN11___isna": "binary",
+  "PAMIN21___isna": "binary",
+  "PA1MIN___isna": "binary",
+  "PAVIG11___isna": "binary",
+  "PAVIG21___isna": "binary",
+  "PA1VIGM___isna": "binary",
+  "_PACAT1__isna": "binary",
+  "_PASTAE1__isna": "binary"
+ },
+ "binary": [
+  "HLTHPLN1",
+  "MEDCOST",
+  "BLOODCHO",
+  "TOLDHI2",
+  "ASTHMA3",
+  "CHCSCNCR",
+  "CHCOCNCR",
+  "CHCCOPD1",
+  "HAVARTH3",
+  "ADDEPEV2",
+  "CHCKIDNY",
+  "SEX",
+  "VETERAN3",
+  "INTERNET",
+  "QLACTLM2",
+  "USEEQUIP",
+  "BLIND",
+  "DECIDE",
+  "DIFFWALK",
+  "DIFFDRES",
+  "DIFFALON",
+  "SMOKE100",
+  "EXERANY2",
+  "LMTJOIN3",
+  "ARTHDIS2",
+  "FLUSHOT6",
+  "PNEUVAC3",
+  "HIVTST6",
+  "CAREGIV1",
+  "CIMEMLOS",
+  "_HISPANC",
+  "_RACEG21",
+  "DRNKANY5",
+  "_RFBING5",
+  "_FRTRESP",
+  "_FRT16",
+  "_VEG23",
+  "_PA30021",
+  "_PASTAE1",
+  "CHOLCHK__isna",
+  "TOLDHI2__isna",
+  "INCOME2__isna",
+  "WEIGHT2__isna",
+  "SMOKDAY2__isna",
+  "LASTSMK2__isna",
+  "FRUITJU1__isna",
+  "FRUIT1__isna",
+  "FVBEANS__isna",
+  "FVGREEN__isna",
+  "FVORANG__isna",
+  "VEGETAB1__isna",
+  "EXERANY2__isna",
+  "EXRACT11__isna",
+  "EXEROFT1__isna",
+  "EXRACT21__isna",
+  "EXEROFT2__isna",
+  "STRENGTH__isna",
+  "LMTJOIN3__isna",
+  "ARTHDIS2__isna",
+  "ARTHSOCL__isna",
+  "SEATBELT__isna",
+  "FLUSHOT6__isna",
+  "IMFVPLAC__isna",
+  "PNEUVAC3__isna",
+  "HIVTST6__isna",
+  "WHRTST10__isna",
+  "CAREGIV1__isna",
+  "CIMEMLOS__isna",
+  "SXORIENT__isna",
+  "TRNSGNDR__isna",
+  "_BMI5__isna",
+  "_RFBING5__isna",
+  "_DRNKWEK__isna",
+  "_FRUTSUM__isna",
+  "_VEGESUM__isna",
+  "METVL11___isna",
+  "METVL21___isna",
+  "ACTIN11___isna",
+  "ACTIN21___isna",
+  "PADUR1___isna",
+  "PADUR2___isna",
+  "PAFREQ1___isna",
+  "_MINAC11__isna",
+  "_MINAC21__isna",
+  "STRFREQ___isna",
+  "PAMIN11___isna",
+  "PAMIN21___isna",
+  "PA1MIN___isna",
+  "PAVIG11___isna",
+  "PAVIG21___isna",
+  "PA1VIGM___isna",
+  "_PACAT1__isna",
+  "_PASTAE1__isna"
+ ],
+ "nominal": [
+  "PERSDOC2",
+  "BPHIGH4",
+  "BPMEDS",
+  "CHOLCHK",
+  "MARITAL",
+  "RENTHOM1",
+  "EMPLOY1",
+  "SMOKDAY2",
+  "LASTSMK2",
+  "USENOW3",
+  "EXRACT11",
+  "EXRACT21",
+  "ARTHSOCL",
+  "JOINPAIN",
+  "IMFVPLAC",
+  "WHRTST10",
+  "SXORIENT",
+  "TRNSGNDR",
+  "_CHOLCHK",
+  "_PRACE1",
+  "_MRACE1",
+  "_RACE",
+  "_RACEGR3",
+  "_RACE_G1",
+  "_AGE65YR",
+  "_MISFRTN",
+  "_MISVEGN",
+  "_VEGETEX",
+  "ACTIN11_",
+  "ACTIN21_",
+  "_LMTACT1",
+  "_LMTWRK1",
+  "_LMTSCL1"
+ ],
+ "ordinal": [
+  "GENHLTH",
+  "PHYSHLTH",
+  "MENTHLTH",
+  "POORHLTH",
+  "CHECKUP1",
+  "DIABETE3",
+  "EDUCA",
+  "CHILDREN",
+  "INCOME2",
+  "ALCDAY5",
+  "SEATBELT",
+  "_AGE_G",
+  "_EDUCAG",
+  "_SMOKER3",
+  "_DRNKWEK",
+  "_FRUTSUM",
+  "_VEGESUM",
+  "_PACAT1"
+ ],
+ "continuous": [
+  "WEIGHT2",
+  "HEIGHT3",
+  "AVEDRNK2",
+  "DRNK3GE5",
+  "MAXDRNKS",
+  "FRUITJU1",
+  "FRUIT1",
+  "FVBEANS",
+  "FVGREEN",
+  "FVORANG",
+  "VEGETAB1",
+  "EXEROFT1",
+  "EXEROFT2",
+  "STRENGTH",
+  "_AGE80",
+  "_BMI5",
+  "METVL11_",
+  "METVL21_",
+  "FC60_",
+  "PADUR1_",
+  "PADUR2_",
+  "PAFREQ1_",
+  "_MINAC11",
+  "_MINAC21",
+  "STRFREQ_",
+  "PAMIN11_",
+  "PAMIN21_",
+  "PA1MIN_",
+  "PAVIG11_",
+  "PAVIG21_",
+  "PA1VIGM_"
+ ],
+ "winsor": {
+  "WEIGHT2": [
+   102.0,
+   320.0
+  ],
+  "HEIGHT3": [
+   59.0,
+   76.0
+  ],
+  "AVEDRNK2": [
+   0.0,
+   8.0
+  ],
+  "DRNK3GE5": [
+   0.0,
+   10.0
+  ],
+  "MAXDRNKS": [
+   0.0,
+   12.0
+  ],
+  "FRUITJU1": [
+   0.0,
+   90.0
+  ],
+  "FRUIT1": [
+   0.0,
+   120.0
+  ],
+  "FVBEANS": [
+   0.0,
+   60.0
+  ],
+  "FVGREEN": [
+   0.0,
+   90.0
+  ],
+  "FVORANG": [
+   0.0,
+   60.0
+  ],
+  "VEGETAB1": [
+   0.0,
+   90.0
+  ],
+  "EXEROFT1": [
+   2.0,
+   60.0
+  ],
+  "EXEROFT2": [
+   1.0,
+   42.857142857142854
+  ],
+  "STRENGTH": [
+   0.0,
+   30.0
+  ],
+  "_AGE80": [
+   19.0,
+   80.0
+  ],
+  "_BMI5": [
+   17.920000076293945,
+   49.43000030517578
+  ],
+  "METVL11_": [
+   0.0,
+   7.800000190734863
+  ],
+  "METVL21_": [
+   0.0,
+   9.0
+  ],
+  "FC60_": [
+   2.180000066757202,
+   8.399999618530273
+  ],
+  "PADUR1_": [
+   5.0,
+   360.0
+  ],
+  "PADUR2_": [
+   4.0,
+   419.0
+  ],
+  "PAFREQ1_": [
+   0.46700000762939453,
+   14.0
+  ],
+  "_MINAC11": [
+   0.0,
+   1680.0
+  ],
+  "_MINAC21": [
+   0.0,
+   1568.0
+  ],
+  "STRFREQ_": [
+   0.0,
+   7.0
+  ],
+  "PAMIN11_": [
+   0.0,
+   2520.0
+  ],
+  "PAMIN21_": [
+   0.0,
+   2100.0
+  ],
+  "PA1MIN_": [
+   0.0,
+   3495.0
+  ],
+  "PAVIG11_": [
+   0.0,
+   1050.0
+  ],
+  "PAVIG21_": [
+   0.0,
+   840.0
+  ],
+  "PA1VIGM_": [
+   0.0,
+   1440.0
+  ]
+ },
+ "impute": {
+  "GENHLTH": {
+   "value": 2.0,
+   "rule": "median",
+   "train_missing": 0.0027062032395203193
+  },
+  "PHYSHLTH": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.02166181602084508
+  },
+  "MENTHLTH": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.016331692748411477
+  },
+  "HLTHPLN1": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.004041019702256693
+  },
+  "PERSDOC2": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.00406235238545111
+  },
+  "MEDCOST": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.002532494247794353
+  },
+  "CHECKUP1": {
+   "value": 1.0,
+   "rule": "median",
+   "train_missing": 0.013549301354625383
+  },
+  "BPHIGH4": {
+   "value": 3.0,
+   "rule": "mode",
+   "train_missing": 0.0027976290246392492
+  },
+  "BLOODCHO": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.021149831624179074
+  },
+  "CHOLCHK": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.1466042939643744
+  },
+  "TOLDHI2": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.14117360232831
+  },
+  "ASTHMA3": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.0029987657519008944
+  },
+  "CHCSCNCR": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.002486781355234888
+  },
+  "CHCOCNCR": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.0019930821155926676
+  },
+  "CHCCOPD1": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.004714522985966142
+  },
+  "HAVARTH3": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.005738491779298155
+  },
+  "ADDEPEV2": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.004418912947414936
+  },
+  "CHCKIDNY": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.0029774330687064774
+  },
+  "DIABETE3": {
+   "value": 3.0,
+   "rule": "median",
+   "train_missing": 0.0014597650357322444
+  },
+  "EDUCA": {
+   "value": 5.0,
+   "rule": "median",
+   "train_missing": 0.0038764532890426195
+  },
+  "RENTHOM1": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.0069178844073323476
+  },
+  "VETERAN3": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.001889466225791214
+  },
+  "CHILDREN": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.00831060386731071
+  },
+  "INCOME2": {
+   "value": 6.0,
+   "rule": "median",
+   "train_missing": 0.17856674844195225
+  },
+  "INTERNET": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.01286360796623341
+  },
+  "WEIGHT2": {
+   "value": 171.0,
+   "rule": "median",
+   "train_missing": 0.0700961494506834
+  },
+  "HEIGHT3": {
+   "value": 66.0,
+   "rule": "median",
+   "train_missing": 0.03462294482453868
+  },
+  "QLACTLM2": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.0278787694089323
+  },
+  "USEEQUIP": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.025925305133557834
+  },
+  "BLIND": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.028939308516311883
+  },
+  "DECIDE": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.03293156779983848
+  },
+  "DIFFWALK": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.03284928459323144
+  },
+  "DIFFDRES": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.03128590366769775
+  },
+  "DIFFALON": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.034196291160650344
+  },
+  "SMOKE100": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.039465463909671324
+  },
+  "SMOKDAY2": {
+   "value": 3.0,
+   "rule": "mode",
+   "train_missing": 0.5839761073948223
+  },
+  "LASTSMK2": {
+   "value": 7.0,
+   "rule": "mode",
+   "train_missing": 0.7252898959269812
+  },
+  "USENOW3": {
+   "value": 3.0,
+   "rule": "mode",
+   "train_missing": 0.03792036814116141
+  },
+  "ALCDAY5": {
+   "value": 1.0,
+   "rule": "median",
+   "train_missing": 0.04868118304965944
+  },
+  "FRUITJU1": {
+   "value": 2.0,
+   "rule": "median",
+   "train_missing": 0.08644612735611867
+  },
+  "FRUIT1": {
+   "value": 30.0,
+   "rule": "median",
+   "train_missing": 0.08206073719658068
+  },
+  "FVBEANS": {
+   "value": 4.285714285714286,
+   "rule": "median",
+   "train_missing": 0.08954241394547975
+  },
+  "FVGREEN": {
+   "value": 12.857142857142858,
+   "rule": "median",
+   "train_missing": 0.08500464747741021
+  },
+  "FVORANG": {
+   "value": 5.0,
+   "rule": "median",
+   "train_missing": 0.08825026284913222
+  },
+  "VEGETAB1": {
+   "value": 21.428571428571427,
+   "rule": "median",
+   "train_missing": 0.09323296813811388
+  },
+  "EXERANY2": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.0855349170311
+  },
+  "EXRACT11": {
+   "value": 64.0,
+   "rule": "mode",
+   "train_missing": 0.32861169945296903
+  },
+  "EXEROFT1": {
+   "value": 15.0,
+   "rule": "median",
+   "train_missing": 0.3390586191658921
+  },
+  "EXRACT21": {
+   "value": 88.0,
+   "rule": "mode",
+   "train_missing": 0.33428314565651335
+  },
+  "EXEROFT2": {
+   "value": 10.0,
+   "rule": "median",
+   "train_missing": 0.5574321544486264
+  },
+  "STRENGTH": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.09903241044082466
+  },
+  "LMTJOIN3": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.6952382403583891
+  },
+  "ARTHDIS2": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.7010346351349293
+  },
+  "ARTHSOCL": {
+   "value": 3.0,
+   "rule": "mode",
+   "train_missing": 0.6950919591021988
+  },
+  "SEATBELT": {
+   "value": 1.0,
+   "rule": "median",
+   "train_missing": 0.09839242994499216
+  },
+  "FLUSHOT6": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.10013561491459308
+  },
+  "IMFVPLAC": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.5683819159797034
+  },
+  "PNEUVAC3": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.17663766437594283
+  },
+  "HIVTST6": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.13038231215810567
+  },
+  "WHRTST10": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.7472991299312783
+  },
+  "CAREGIV1": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.7548935651484907
+  },
+  "CIMEMLOS": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.7382510247306748
+  },
+  "SXORIENT": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.6320447376841849
+  },
+  "TRNSGNDR": {
+   "value": 4.0,
+   "rule": "mode",
+   "train_missing": 0.6271504106541514
+  },
+  "_CHOLCHK": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.03426943178874549
+  },
+  "_PRACE1": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.01969920916695872
+  },
+  "_MRACE1": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.01969920916695872
+  },
+  "_HISPANC": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.009145626038063601
+  },
+  "_RACE": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.016572447315891324
+  },
+  "_RACEG21": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.016572447315891324
+  },
+  "_RACEGR3": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.016572447315891324
+  },
+  "_RACE_G1": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.016572447315891324
+  },
+  "_BMI5": {
+   "value": 26.93000030517578,
+   "rule": "median",
+   "train_missing": 0.0825056760174928
+  },
+  "_EDUCAG": {
+   "value": 3.0,
+   "rule": "median",
+   "train_missing": 0.0038764532890426195
+  },
+  "_SMOKER3": {
+   "value": 4.0,
+   "rule": "median",
+   "train_missing": 0.04042848217959072
+  },
+  "DRNKANY5": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.04868118304965944
+  },
+  "_RFBING5": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.057470248525759215
+  },
+  "_DRNKWEK": {
+   "value": 23.0,
+   "rule": "median",
+   "train_missing": 0.05780242887835799
+  },
+  "_FRUTSUM": {
+   "value": 1.0,
+   "rule": "median",
+   "train_missing": 0.09787130296981425
+  },
+  "_VEGESUM": {
+   "value": 1.7000000476837158,
+   "rule": "median",
+   "train_missing": 0.11460222164657839
+  },
+  "METVL11_": {
+   "value": 3.5,
+   "rule": "median",
+   "train_missing": 0.3313483779541957
+  },
+  "METVL21_": {
+   "value": 3.5,
+   "rule": "median",
+   "train_missing": 0.34261812973318906
+  },
+  "FC60_": {
+   "value": 4.630000114440918,
+   "rule": "median",
+   "train_missing": 0.012016395690797994
+  },
+  "ACTIN11_": {
+   "value": 1.0,
+   "rule": "mode",
+   "train_missing": 0.33849482682432536
+  },
+  "ACTIN21_": {
+   "value": 0.0,
+   "rule": "mode",
+   "train_missing": 0.3495451567190333
+  },
+  "PADUR1_": {
+   "value": 45.0,
+   "rule": "median",
+   "train_missing": 0.34678714553461226
+  },
+  "PADUR2_": {
+   "value": 45.0,
+   "rule": "median",
+   "train_missing": 0.562704374723818
+  },
+  "PAFREQ1_": {
+   "value": 3.5,
+   "rule": "median",
+   "train_missing": 0.33910128453228094
+  },
+  "_MINAC11": {
+   "value": 140.0,
+   "rule": "median",
+   "train_missing": 0.3509287336004998
+  },
+  "_MINAC21": {
+   "value": 33.0,
+   "rule": "median",
+   "train_missing": 0.3560150547792829
+  },
+  "STRFREQ_": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.09907507580721349
+  },
+  "PAMIN11_": {
+   "value": 180.0,
+   "rule": "median",
+   "train_missing": 0.35764243375439986
+  },
+  "PAMIN21_": {
+   "value": 46.0,
+   "rule": "median",
+   "train_missing": 0.36266780440977037
+  },
+  "PA1MIN_": {
+   "value": 270.0,
+   "rule": "median",
+   "train_missing": 0.3439407560912429
+  },
+  "PAVIG11_": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.34676276532524725
+  },
+  "PAVIG21_": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.35659713227787343
+  },
+  "PA1VIGM_": {
+   "value": 0.0,
+   "rule": "median",
+   "train_missing": 0.3406920931933503
+  },
+  "_PACAT1": {
+   "value": 2.0,
+   "rule": "median",
+   "train_missing": 0.12599692199856766
+  },
+  "_PA30021": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.12599692199856766
+  },
+  "_PASTAE1": {
+   "value": 2.0,
+   "rule": "mode",
+   "train_missing": 0.12964481082481297
+  },
+  "_LMTACT1": {
+   "value": 3.0,
+   "rule": "mode",
+   "train_missing": 0.034851509287336005
+  },
+  "_LMTWRK1": {
+   "value": 3.0,
+   "rule": "mode",
+   "train_missing": 0.040647904063876146
+  },
+  "_LMTSCL1": {
+   "value": 4.0,
+   "rule": "mode",
+   "train_missing": 0.034705228031145716
+  }
+ },
+ "flag_blocks": {
+  "CHOLCHK": [
+   "CHOLCHK"
+  ],
+  "TOLDHI2": [
+   "TOLDHI2"
+  ],
+  "INCOME2": [
+   "INCOME2"
+  ],
+  "WEIGHT2": [
+   "WEIGHT2"
+  ],
+  "SMOKDAY2": [
+   "SMOKDAY2"
+  ],
+  "LASTSMK2": [
+   "LASTSMK2"
+  ],
+  "FRUITJU1": [
+   "FRUITJU1"
+  ],
+  "FRUIT1": [
+   "FRUIT1"
+  ],
+  "FVBEANS": [
+   "FVBEANS"
+  ],
+  "FVGREEN": [
+   "FVGREEN"
+  ],
+  "FVORANG": [
+   "FVORANG"
+  ],
+  "VEGETAB1": [
+   "VEGETAB1"
+  ],
+  "EXERANY2": [
+   "EXERANY2"
+  ],
+  "EXRACT11": [
+   "EXRACT11"
+  ],
+  "EXEROFT1": [
+   "EXEROFT1"
+  ],
+  "EXRACT21": [
+   "EXRACT21"
+  ],
+  "EXEROFT2": [
+   "EXEROFT2"
+  ],
+  "STRENGTH": [
+   "STRENGTH"
+  ],
+  "LMTJOIN3": [
+   "LMTJOIN3"
+  ],
+  "ARTHDIS2": [
+   "ARTHDIS2"
+  ],
+  "ARTHSOCL": [
+   "ARTHSOCL"
+  ],
+  "SEATBELT": [
+   "SEATBELT"
+  ],
+  "FLUSHOT6": [
+   "FLUSHOT6"
+  ],
+  "IMFVPLAC": [
+   "IMFVPLAC"
+  ],
+  "PNEUVAC3": [
+   "PNEUVAC3"
+  ],
+  "HIVTST6": [
+   "HIVTST6"
+  ],
+  "WHRTST10": [
+   "WHRTST10"
+  ],
+  "CAREGIV1": [
+   "CAREGIV1"
+  ],
+  "CIMEMLOS": [
+   "CIMEMLOS"
+  ],
+  "SXORIENT": [
+   "SXORIENT"
+  ],
+  "TRNSGNDR": [
+   "TRNSGNDR"
+  ],
+  "_BMI5": [
+   "_BMI5"
+  ],
+  "_RFBING5": [
+   "_RFBING5"
+  ],
+  "_DRNKWEK": [
+   "_DRNKWEK"
+  ],
+  "_FRUTSUM": [
+   "_FRUTSUM"
+  ],
+  "_VEGESUM": [
+   "_VEGESUM"
+  ],
+  "METVL11_": [
+   "METVL11_"
+  ],
+  "METVL21_": [
+   "METVL21_"
+  ],
+  "ACTIN11_": [
+   "ACTIN11_"
+  ],
+  "ACTIN21_": [
+   "ACTIN21_"
+  ],
+  "PADUR1_": [
+   "PADUR1_"
+  ],
+  "PADUR2_": [
+   "PADUR2_"
+  ],
+  "PAFREQ1_": [
+   "PAFREQ1_"
+  ],
+  "_MINAC11": [
+   "_MINAC11"
+  ],
+  "_MINAC21": [
+   "_MINAC21"
+  ],
+  "STRFREQ_": [
+   "STRFREQ_"
+  ],
+  "PAMIN11_": [
+   "PAMIN11_"
+  ],
+  "PAMIN21_": [
+   "PAMIN21_"
+  ],
+  "PA1MIN_": [
+   "PA1MIN_"
+  ],
+  "PAVIG11_": [
+   "PAVIG11_"
+  ],
+  "PAVIG21_": [
+   "PAVIG21_"
+  ],
+  "PA1VIGM_": [
+   "PA1VIGM_"
+  ],
+  "_PACAT1": [
+   "_PACAT1",
+   "_PA30021"
+  ],
+  "_PASTAE1": [
+   "_PASTAE1"
+  ]
+ },
+ "conditional_zero": {
+  "POORHLTH": "no bad physical/mental health day -> 0 poor-health days",
+  "BPMEDS": "not hypertensive -> not on BP medication",
+  "JOINPAIN": "no arthritis/joint symptoms -> no joint pain",
+  "AVEDRNK2": "did not drink in the past 30 days -> 0 drinks",
+  "DRNK3GE5": "did not drink -> 0 binge episodes",
+  "MAXDRNKS": "did not drink -> 0 drinks at once"
+ },
+ "dropped": {
+  "SEQNO": "1_identifier_admin",
+  "IDATE": "1_identifier_admin",
+  "IMONTH": "1_identifier_admin",
+  "IDAY": "1_identifier_admin",
+  "IYEAR": "1_identifier_admin",
+  "FMONTH": "1_identifier_admin",
+  "DISPCODE": "1_identifier_admin",
+  "QSTVER": "1_identifier_admin",
+  "QSTLANG": "1_identifier_admin",
+  "_DUALUSE": "1_identifier_admin",
+  "_DUALCOR": "1_identifier_admin",
+  "CTELENUM": "1_identifier_admin",
+  "CTELNUM1": "1_identifier_admin",
+  "PVTRESD1": "1_identifier_admin",
+  "PVTRESD2": "1_identifier_admin",
+  "COLGHOUS": "1_identifier_admin",
+  "CCLGHOUS": "1_identifier_admin",
+  "STATERES": "1_identifier_admin",
+  "CSTATE": "1_identifier_admin",
+  "CELLFON2": "1_identifier_admin",
+  "CELLFON3": "1_identifier_admin",
+  "LANDLINE": "1_identifier_admin",
+  "LADULT": "1_identifier_admin",
+  "CADULT": "1_identifier_admin",
+  "HHADULT": "1_identifier_admin",
+  "NUMADULT": "1_identifier_admin",
+  "NUMMEN": "1_identifier_admin",
+  "NUMWOMEN": "1_identifier_admin",
+  "NUMHHOL2": "1_identifier_admin",
+  "NUMPHON2": "1_identifier_admin",
+  "CPDEMO1": "1_identifier_admin",
+  "_PSU": "2_survey_weight_design",
+  "_STSTR": "2_survey_weight_design",
+  "_STRWT": "2_survey_weight_design",
+  "_RAWRAKE": "2_survey_weight_design",
+  "_WT2RAKE": "2_survey_weight_design",
+  "_LLCPWT": "2_survey_weight_design",
+  "_CLLCPWT": "2_survey_weight_design",
+  "_CHISPNC": "2_survey_weight_design",
+  "_CRACE1": "2_survey_weight_design",
+  "_CPRACE": "2_survey_weight_design",
+  "HAREHAB1": "3_label_leakage",
+  "STREHAB1": "3_label_leakage",
+  "CVDASPRN": "3_label_leakage",
+  "ASPUNSAF": "3_label_leakage",
+  "RLIVPAIN": "3_label_leakage",
+  "RDUCHART": "3_label_leakage",
+  "RDUCSTRK": "3_label_leakage",
+  "CVDSTRK3": "3_label_leakage",
+  "FLSHTMY2": "8_raw_date_code",
+  "HIVTSTD3": "8_raw_date_code",
+  "_STATE": "4_geography_proxy",
+  "MSCODE": "4_geography_proxy",
+  "_RFHYPE5": "5_redundant_derived",
+  "_RFCHOL": "5_redundant_derived",
+  "_LTASTH1": "5_redundant_derived",
+  "_CASTHM1": "5_redundant_derived",
+  "_RFBMI5": "5_redundant_derived",
+  "_RFSMOK3": "5_redundant_derived",
+  "_RFDRHV5": "5_redundant_derived",
+  "_RFSEAT2": "5_redundant_derived",
+  "_RFSEAT3": "5_redundant_derived",
+  "_PAINDX1": "5_redundant_derived",
+  "_PA150R2": "5_redundant_derived",
+  "_PA300R2": "5_redundant_derived",
+  "_PASTRNG": "5_redundant_derived",
+  "_PAREC1": "5_redundant_derived",
+  "_FRTLT1": "5_redundant_derived",
+  "_VEGLT1": "5_redundant_derived",
+  "_TOTINDA": "5_redundant_derived",
+  "_HCVU651": "5_redundant_derived",
+  "PAMISS1_": "5_redundant_derived",
+  "EXERHMM1": "5_redundant_derived",
+  "EXERHMM2": "5_redundant_derived",
+  "ADANXEV": "6_optional_module_over80pct_missing",
+  "ADDOWN": "6_optional_module_over80pct_missing",
+  "ADEAT1": "6_optional_module_over80pct_missing",
+  "ADENERGY": "6_optional_module_over80pct_missing",
+  "ADFAIL": "6_optional_module_over80pct_missing",
+  "ADMOVE": "6_optional_module_over80pct_missing",
+  "ADPLEASR": "6_optional_module_over80pct_missing",
+  "ADSLEEP": "6_optional_module_over80pct_missing",
+  "ADTHINK": "6_optional_module_over80pct_missing",
+  "ARTHEDU": "6_optional_module_over80pct_missing",
+  "ARTHEXER": "6_optional_module_over80pct_missing",
+  "ARTHWGT": "6_optional_module_over80pct_missing",
+  "ARTTODAY": "6_optional_module_over80pct_missing",
+  "ASACTLIM": "6_optional_module_over80pct_missing",
+  "ASATTACK": "6_optional_module_over80pct_missing",
+  "ASDRVIST": "6_optional_module_over80pct_missing",
+  "ASERVIST": "6_optional_module_over80pct_missing",
+  "ASINHALR": "6_optional_module_over80pct_missing",
+  "ASNOSLEP": "6_optional_module_over80pct_missing",
+  "ASRCHKUP": "6_optional_module_over80pct_missing",
+  "ASTHMAGE": "6_optional_module_over80pct_missing",
+  "ASTHMED3": "6_optional_module_over80pct_missing",
+  "ASTHNOW": "6_optional_module_over80pct_missing",
+  "ASYMPTOM": "6_optional_module_over80pct_missing",
+  "BLDSTOOL": "6_optional_module_over80pct_missing",
+  "BLDSUGAR": "6_optional_module_over80pct_missing",
+  "CASTHDX2": "6_optional_module_over80pct_missing",
+  "CASTHNO2": "6_optional_module_over80pct_missing",
+  "CDASSIST": "6_optional_module_over80pct_missing",
+  "CDDISCUS": "6_optional_module_over80pct_missing",
+  "CDHELP": "6_optional_module_over80pct_missing",
+  "CDHOUSE": "6_optional_module_over80pct_missing",
+  "CDSOCIAL": "6_optional_module_over80pct_missing",
+  "CHKHEMO3": "6_optional_module_over80pct_missing",
+  "CRGVEXPT": "6_optional_module_over80pct_missing",
+  "CRGVHOUS": "6_optional_module_over80pct_missing",
+  "CRGVHRS1": "6_optional_module_over80pct_missing",
+  "CRGVLNG1": "6_optional_module_over80pct_missing",
+  "CRGVMST2": "6_optional_module_over80pct_missing",
+  "CRGVPERS": "6_optional_module_over80pct_missing",
+  "CRGVPRB1": "6_optional_module_over80pct_missing",
+  "CRGVREL1": "6_optional_module_over80pct_missing",
+  "DIABAGE2": "6_optional_module_over80pct_missing",
+  "DIABEDU": "6_optional_module_over80pct_missing",
+  "DIABEYE": "6_optional_module_over80pct_missing",
+  "DOCTDIAB": "6_optional_module_over80pct_missing",
+  "DRADVISE": "6_optional_module_over80pct_missing",
+  "EMTSUPRT": "6_optional_module_over80pct_missing",
+  "EYEEXAM": "6_optional_module_over80pct_missing",
+  "FEETCHK": "6_optional_module_over80pct_missing",
+  "FEETCHK2": "6_optional_module_over80pct_missing",
+  "HADHYST2": "6_optional_module_over80pct_missing",
+  "HADMAM": "6_optional_module_over80pct_missing",
+  "HADPAP2": "6_optional_module_over80pct_missing",
+  "HADSGCO1": "6_optional_module_over80pct_missing",
+  "HADSIGM3": "6_optional_module_over80pct_missing",
+  "HOWLONG": "6_optional_module_over80pct_missing",
+  "HPLSTTST": "6_optional_module_over80pct_missing",
+  "HPVADSHT": "6_optional_module_over80pct_missing",
+  "HPVADVC2": "6_optional_module_over80pct_missing",
+  "HPVTEST": "6_optional_module_over80pct_missing",
+  "INSULIN": "6_optional_module_over80pct_missing",
+  "LASTPAP2": "6_optional_module_over80pct_missing",
+  "LASTSIG3": "6_optional_module_over80pct_missing",
+  "LENGEXAM": "6_optional_module_over80pct_missing",
+  "LONGWTCH": "6_optional_module_over80pct_missing",
+  "LSATISFY": "6_optional_module_over80pct_missing",
+  "LSTBLDS3": "6_optional_module_over80pct_missing",
+  "MISTMNT": "6_optional_module_over80pct_missing",
+  "PCDMDECN": "6_optional_module_over80pct_missing",
+  "PCPSAAD2": "6_optional_module_over80pct_missing",
+  "PCPSADE1": "6_optional_module_over80pct_missing",
+  "PCPSADI1": "6_optional_module_over80pct_missing",
+  "PCPSARE1": "6_optional_module_over80pct_missing",
+  "PCPSARS1": "6_optional_module_over80pct_missing",
+  "PDIABTST": "6_optional_module_over80pct_missing",
+  "PREDIAB1": "6_optional_module_over80pct_missing",
+  "PREGNANT": "6_optional_module_over80pct_missing",
+  "PROFEXAM": "6_optional_module_over80pct_missing",
+  "PSATEST1": "6_optional_module_over80pct_missing",
+  "PSATIME": "6_optional_module_over80pct_missing",
+  "RCSGENDR": "6_optional_module_over80pct_missing",
+  "RCSRLTN2": "6_optional_module_over80pct_missing",
+  "SCNTLPAD": "6_optional_module_over80pct_missing",
+  "SCNTLWK1": "6_optional_module_over80pct_missing",
+  "SCNTMEL1": "6_optional_module_over80pct_missing",
+  "SCNTMNY1": "6_optional_module_over80pct_missing",
+  "SCNTPAID": "6_optional_module_over80pct_missing",
+  "SCNTWRK1": "6_optional_module_over80pct_missing",
+  "SHINGLE2": "6_optional_module_over80pct_missing",
+  "STOPSMK2": "6_optional_module_over80pct_missing",
+  "TETANUS": "6_optional_module_over80pct_missing",
+  "VICTRCT4": "6_optional_module_over80pct_missing",
+  "VIDFCLT2": "6_optional_module_over80pct_missing",
+  "VIEYEXM2": "6_optional_module_over80pct_missing",
+  "VIGLUMA2": "6_optional_module_over80pct_missing",
+  "VIINSUR2": "6_optional_module_over80pct_missing",
+  "VIMACDG2": "6_optional_module_over80pct_missing",
+  "VINOCRE2": "6_optional_module_over80pct_missing",
+  "VIPRFVS2": "6_optional_module_over80pct_missing",
+  "VIREDIF3": "6_optional_module_over80pct_missing",
+  "WTCHSALT": "6_optional_module_over80pct_missing",
+  "_DRDXAR1": "9_near_duplicate_of_HAVARTH3",
+  "_FRUITEX": "9_near_duplicate_of__FRTRESP",
+  "_AIDTST3": "9_near_duplicate_of_HIVTST6",
+  "PAFREQ2_": "9_near_duplicate_of_EXEROFT2",
+  "WTKG3": "9_near_duplicate_of_WEIGHT2",
+  "MAXVO2_": "9_near_duplicate_of_FC60_",
+  "FRUTDA1_": "9_near_duplicate_of_FRUIT1",
+  "FTJUDA1_": "9_near_duplicate_of_FRUITJU1",
+  "VEGEDA1_": "9_near_duplicate_of_VEGETAB1",
+  "GRENDAY_": "9_near_duplicate_of_FVGREEN",
+  "ORNGDAY_": "9_near_duplicate_of_FVORANG",
+  "BEANDAY_": "9_near_duplicate_of_FVBEANS",
+  "DROCDY3_": "9_near_duplicate_of_ALCDAY5",
+  "HTM4": "9_near_duplicate_of_HEIGHT3",
+  "_VEGRESP": "9_near_duplicate_of__VEGETEX",
+  "_AGEG5YR": "9_near_duplicate_of__AGE80",
+  "_CHLDCNT": "9_near_duplicate_of_CHILDREN",
+  "HTIN4": "9_near_duplicate_of_HEIGHT3",
+  "_RFHLTH": "10_recoding_of_GENHLTH",
+  "_ASTHMS1": "10_recoding_of_ASTHMA3",
+  "_BMI5CAT": "10_recoding_of__BMI5",
+  "_INCOMG": "10_recoding_of_INCOME2",
+  "_FLSHOT6": "10_recoding_of_FLUSHOT6",
+  "_PNEUMO2": "10_recoding_of_PNEUVAC3"
+ },
+ "sentinels": [
+  7,
+  8,
+  9,
+  14,
+  77,
+  88,
+  98,
+  99,
+  555,
+  777,
+  888,
+  900,
+  999,
+  7777,
+  8888,
+  9999,
+  99900
+ ],
+ "manual_rules": {
+  "CHECKUP1": {
+   "nan": [
+    7,
+    9
+   ],
+   "zero": [],
+   "other": [
+    8
+   ]
+  },
+  "EYEEXAM": {
+   "nan": [
+    7,
+    9
+   ],
+   "zero": [],
+   "other": [
+    8
+   ]
+  },
+  "SEATBELT": {
+   "nan": [
+    7,
+    9
+   ],
+   "zero": [],
+   "other": [
+    8
+   ]
+  }
+ },
+ "never_touch": [
+  "DISPCODE",
+  "EXRACT11",
+  "EXRACT21",
+  "FMONTH",
+  "IDATE",
+  "IDAY",
+  "IMONTH",
+  "IYEAR",
+  "MSCODE",
+  "QSTLANG",
+  "QSTVER",
+  "SEQNO",
+  "_CLLCPWT",
+  "_DUALUSE",
+  "_LLCPWT",
+  "_PSU",
+  "_RAWRAKE",
+  "_STATE",
+  "_STRWT",
+  "_STSTR",
+  "_WT2RAKE"
+ ],
+ "positive_rate": 0.08830207079403295
+}
