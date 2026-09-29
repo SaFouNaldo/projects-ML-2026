@@ -33,7 +33,8 @@ def compute_mse(y, tx, w):
     Returns:
         float: 0.5 * mean((y - tx @ w) ** 2)
     """
-    raise NotImplementedError
+    e = y - tx @ w
+    return 1 / 2 * np.mean(e**2)
 
 
 def compute_mse_gradient(y, tx, w):
@@ -42,7 +43,8 @@ def compute_mse_gradient(y, tx, w):
     Returns:
         np.ndarray of shape (D,)
     """
-    raise NotImplementedError
+    e = y - tx @ w
+    return -tx.T @ e / len(y)
 
 
 def sigmoid(t):
@@ -82,7 +84,12 @@ def mean_squared_error_gd(y, tx, initial_w, max_iters, gamma):
     Returns:
         (w, loss): last weight vector of shape (D,) and its MSE (a scalar).
     """
-    raise NotImplementedError
+    w = initial_w
+    for _ in range(max_iters):
+        grad = compute_mse_gradient(y, tx, w)
+        w -= gamma * grad
+    loss = compute_mse(y, tx, w)
+    return w, loss
 
 
 # ---------------------------------------------------------------------------
@@ -105,7 +112,17 @@ def mean_squared_error_sgd(y, tx, initial_w, max_iters, gamma):
     Returns:
         (w, loss): last weight vector and its MSE computed on the FULL dataset.
     """
-    raise NotImplementedError
+    w = initial_w
+    N = len(y)
+    for _ in range(max_iters):
+        # Sample a random index
+        i = np.random.randint(N)
+        # Compute the gradient on that single datapoint
+        grad = compute_mse_gradient(y[i:i+1], tx[i:i+1], w)
+        # Update the weights
+        w -= gamma * grad
+    loss = compute_mse(y, tx, w)
+    return w, loss
 
 
 # ---------------------------------------------------------------------------
