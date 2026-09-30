@@ -46,8 +46,9 @@ def compute_mse_gradient(y, tx, w):
     e = y - tx @ w
     return -tx.T @ e / len(y)
 
+
 def sigmoid(z):
-    """Numerically stable logistic sigmoid """
+    """Numerically stable logistic sigmoid"""
     z = np.asarray(z, dtype=float)
     e = np.exp(-np.abs(z))
     return np.where(z >= 0, 1 / (1 + e), e / (1 + e))
@@ -119,7 +120,7 @@ def mean_squared_error_sgd(y, tx, initial_w, max_iters, gamma):
         # Sample a random index
         i = np.random.randint(N)
         # Compute the gradient on that single datapoint
-        grad = compute_mse_gradient(y[i:i+1], tx[i:i+1], w)
+        grad = compute_mse_gradient(y[i : i + 1], tx[i : i + 1], w)
         # Update the weights
         w -= gamma * grad
     loss = compute_mse(y, tx, w)
@@ -140,7 +141,9 @@ def least_squares(y, tx):
     Returns:
         (w, loss): solution of shape (D,) and its MSE.
     """
-    raise NotImplementedError
+    w = np.linalg.solve(tx.T @ tx, tx.T @ y)
+    w = np.asarray(w).ravel()
+    return w, compute_mse(y, tx, w)
 
 
 # ---------------------------------------------------------------------------
@@ -159,13 +162,18 @@ def ridge_regression(y, tx, lambda_):
     Returns:
         (w, loss): solution of shape (D,) and its MSE WITHOUT the penalty term.
     """
-    raise NotImplementedError
+    n, d = tx.shape
+    a = tx.T @ tx + 2.0 * n * lambda_ * np.eye(d)
+    w = np.linalg.solve(a, tx.T @ y)
+    w = np.asarray(w).ravel()
+    return w, compute_mse(y, tx, w)
 
 
 # ---------------------------------------------------------------------------
 # 5. Logistic regression -- gradient descent           (owner: Yahya)
 # ---------------------------------------------------------------------------
-    
+
+
 def logistic_regression(y, tx, initial_w, max_iters, gamma):
     """Logistic regression using gradient descent.
 
@@ -182,7 +190,7 @@ def logistic_regression(y, tx, initial_w, max_iters, gamma):
     w = initial_w
     (N, _) = tx.shape
     for _ in range(max_iters):
-        gradient = (1/N) * (tx.T @ (sigmoid(tx @ w) - y))
+        gradient = (1 / N) * (tx.T @ (sigmoid(tx @ w) - y))
         # UPDATE
         w = w - gamma * gradient
     z = tx @ w
@@ -212,7 +220,7 @@ def reg_logistic_regression(y, tx, lambda_, initial_w, max_iters, gamma):
     w = initial_w
     (N, _) = tx.shape
     for _ in range(max_iters):
-        gradient = (1/N) * (tx.T @ (sigmoid(tx @ w) - y)) + 2 * lambda_ * w 
+        gradient = (1 / N) * (tx.T @ (sigmoid(tx @ w) - y)) + 2 * lambda_ * w
         # UPDATE
         w = w - gamma * gradient
     z = tx @ w
