@@ -1,4 +1,4 @@
-# CS-433 Machine Learning -- Team Saraya
+# CS-433 Machine Learning -- Team F1-Cardiaque
 
 Yahya Skalli, Sara El Harti, Rania El Kasmi.
 
