@@ -8,6 +8,7 @@ project-1/data/*
 # CSVs are data by default, except the small shared tables we DO track
 *.csv
 !project-1/notebooks/*.csv
+!project-1/notebooks/research_sara/*.csv
 
 # ---- Model outputs ----
 submissions/
