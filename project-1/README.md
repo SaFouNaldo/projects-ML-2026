@@ -16,11 +16,12 @@ project-1/data/dataset_unzipped/dataset/{x_train.csv, y_train.csv, x_test.csv, s
 
 ## Current stage
 
-1. **The six functions.** Each of us implements her/his pair in `implementations.py`.
-2. **The data.** All three of us explore and preprocess the FULL dataset
-   independently, in our own notebook. We then meet, compare what we found, and
-   agree on a single preprocessing pipeline.
-3. **Models.** Decided after that meeting -- nothing about models is fixed yet.
+1. **The six functions.** Implemented / merged into `implementations.py`.
+2. **Sara FE (this branch).** Pipeline figé :
+   - `preprocess_sara.py` + `notebooks/features_sara.txt` (54 brutes)
+   - `clinical_fe.py` — 7 extras `NO_DUP_EXTRAS` (sans redondance)
+   - `pipeline_sara.py` — entrée unique (`build_matrices`)
+3. **Models.** Logistic / reg-logistic + seuil F1 (CV ~0.42).
 
 ## Who does what
 
@@ -41,8 +42,12 @@ compare at the meeting.
 |---|---|
 | `implementations.py` | the six required methods (graded, auto-imported) |
 | `helpers.py` | course helpers, do not modify |
-| `notebooks/` | exploration and preprocessing, one notebook per person |
+| `preprocess_sara.py` | preprocess Sara (fit train → apply test) |
+| `clinical_fe.py` | 7 extras cliniques sans doublon |
+| `pipeline_sara.py` | Sara + extras → matrices |
+| `notebooks/` | exploration équipe + `research_sara/` (pipeline Sara) |
 | `latex-example-paper/` | the LaTeX template for the report |
+| `submissions/` | CSV AICrowd (ignorés par git) |
 
 ## Conventions (agreed on, do not change alone)
 
