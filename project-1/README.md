@@ -18,10 +18,11 @@ project-1/data/dataset_unzipped/dataset/{x_train.csv, y_train.csv, x_test.csv, s
 
 1. **The six functions.** Implemented / merged into `implementations.py`.
 2. **Sara FE (this branch).** Pipeline figé :
-   - `preprocess_sara.py` + `notebooks/features_sara.txt` (54 brutes)
+   - `preprocess_sara.py` + `notebooks/research_sara/features_sara.txt` (54 brutes)
    - `clinical_fe.py` — 7 extras `NO_DUP_EXTRAS` (sans redondance)
-   - `pipeline_sara.py` — entrée unique (`build_matrices`)
-3. **Models.** Logistic / reg-logistic + seuil F1 (CV ~0.42).
+   - `interactions_sara.py` — pairwise top-12
+   - `pipeline_sara.py` — entrée unique (`build_matrices`) → ~176 cols
+3. **Models.** Logistic GD : $\gamma=0.5$, `max_iters` 3000–5000 + seuil F1 (OOF ~0.426).
 
 ## Who does what
 
