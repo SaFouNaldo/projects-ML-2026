@@ -21,7 +21,7 @@ All three are ignored by git. Run the scripts from this folder.
 | `common.py` | data loading and cache, folds, F1, threshold search, pooled / nested report, AUC, score cache, CSV writer |
 | `gbm.py` | histogram gradient boosting for the log-loss (quantile bins, level-wise trees, Newton gain, missing values sent left or right) |
 | `wide.py` | generic encoding of all raw columns (one-hot, missing flags, quantile rank) + full-batch Adam logistic regression with L2 |
-| `cv_logistic.py` | reference: Sara pipeline (176 columns) + IRLS logistic regression |
+| `cv_logistic.py` | reference: base pipeline (176 columns) + IRLS logistic regression |
 | `cv_six_methods.py` | the six functions of `implementations.py` on the same matrix and protocol |
 | `cv_wide.py` | wide logistic regression, one run per `lambda` |
 | `cv_gbm.py` | gradient boosting; scores saved every 100 trees |

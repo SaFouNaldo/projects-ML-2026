@@ -9,7 +9,7 @@ import numpy as np
 
 _ROOT = Path(__file__).resolve().parent
 DATA = _ROOT / "data"
-FEATURES_PATH = _ROOT / "notebooks" / "research_sara" / "features_sara.txt"
+FEATURES_PATH = _ROOT / "notebooks" / "feature_selection" / "selected_features.txt"
 
 NONE_TO_ZERO = {"PHYSHLTH", "MENTHLTH", "CHILDREN", "POORHLTH"}
 LOG1P = {"_FRUTSUM", "_VEGESUM"}
@@ -212,7 +212,11 @@ class Preprocessor:
         if name in NOMINAL or name in BINARY_YESNO or name == "SEX":
             if fit:
                 finite = col[~miss]
-                self.modes_[name] = float(np.bincount(finite.astype(int)).argmax()) if len(finite) else 0.0
+                self.modes_[name] = (
+                    float(np.bincount(finite.astype(int)).argmax())
+                    if len(finite)
+                    else 0.0
+                )
             fill = self.modes_[name]
         else:
             if fit:
@@ -236,7 +240,9 @@ class Preprocessor:
             return np.zeros((X.shape[0], 0), dtype=np.float64), []
         return np.column_stack(flags), names_out
 
-    def _to_numeric_cols(self, X: np.ndarray, fit: bool) -> tuple[np.ndarray, list[str]]:
+    def _to_numeric_cols(
+        self, X: np.ndarray, fit: bool
+    ) -> tuple[np.ndarray, list[str]]:
         parts = []
         names_out = []
         n = X.shape[0]

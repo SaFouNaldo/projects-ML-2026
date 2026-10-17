@@ -9,22 +9,22 @@
 | `dropped_columns.csv` / `features_columns.csv` | listes issues de l’exploration commune |
 | `brfss2015_rules_full.json` / `column_types.json` | références BRFSS |
 
-## Recherche Sara — `research_sara/`
+## Sélection des variables — `feature_selection/`
 
-Pipeline figé (Sara + 7 extras `NO_DUP_EXTRAS`) :
+Pipeline figé (preprocess + 7 extras `NO_DUP_EXTRAS`) :
 
 | Fichier | Rôle |
 |---|---|
-| `notebook_sara.ipynb` | EDA / sélection / grid F1 |
-| `features_sara.txt` | 54 colonnes brutes retenues |
-| `dropped_columns_sara.csv` | colonnes écartées + raison |
-| `features_columns_sara.csv` | détail des 54 gardées |
+| `feature_selection.ipynb` | EDA / sélection / grid F1 |
+| `selected_features.txt` | 54 colonnes brutes retenues |
+| `dropped_columns.csv` | colonnes écartées + raison |
+| `kept_columns.csv` | détail des 54 gardées |
 
-Code associé (dossier `project-1/`) : `preprocess_sara.py`, `clinical_fe.py`, `pipeline_sara.py`.
+Code associé (dossier `project-1/`) : `preprocess.py`, `clinical_fe.py`, `pipeline.py`.
 
 ```python
 from pathlib import Path
-from pipeline_sara import build_matrices
+from pipeline import build_matrices
 
 Xtr, y, Xte, meta = build_matrices(Path("data/dataset_unzipped/dataset"))
 ```

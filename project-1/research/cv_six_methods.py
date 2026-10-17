@@ -1,4 +1,4 @@
-"""The six course methods on the frozen Sara matrix (176 cols), same 5-fold protocol.
+"""The six course methods on the frozen base matrix (176 cols), same 5-fold protocol.
 
 Interactions are refitted inside each fold. Every method outputs a score; the F1
 threshold is chosen as everywhere else (pooled and nested).
@@ -19,8 +19,8 @@ from implementations import (
     reg_logistic_regression,
     ridge_regression,
 )
-from interactions_sara import TopKPairInteractions
-from preprocess_sara import build_train_test
+from interactions import TopKPairInteractions
+from preprocess import build_train_test
 
 t0 = time.time()
 tx, y, _, _ = build_train_test(

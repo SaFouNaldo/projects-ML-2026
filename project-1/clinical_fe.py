@@ -1,15 +1,15 @@
-"""Extras cliniques sans redondance avec le preprocess Sara.
+"""Extras cliniques sans redondance avec le preprocess de base.
 
 Pipeline retenu
 ---------------
-Sara (54 brutes → preprocess_sara → ~103 cols)
+Base (54 brutes → preprocess → ~103 cols)
 + NO_DUP_EXTRAS (7 cols) :
-  - stroke, insulin : info absente de features_sara
+  - stroke, insulin : info absente de selected_features
   - hta_untreated, diab_x_female, risk_x_care, high_risk_low_care,
     silent_highrisk_phenotype : interactions / phénotypes
     (ascvd et care sont calculés en interne, pas ajoutés comme colonnes)
 
-Ne pas empiler ascvd_points / care_access_score / metabolic_* sur Sara :
+Ne pas empiler ascvd_points / care_access_score / metabolic_* sur la base :
 ils résument des variables déjà présentes.
 """
 

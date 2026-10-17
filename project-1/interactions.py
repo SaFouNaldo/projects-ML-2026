@@ -47,7 +47,9 @@ def _logreg_irls(
 class TopKPairInteractions:
     """Ajoute les produits x_i * x_j pour les K colonnes au plus fort |w|."""
 
-    def __init__(self, k: int = 12, lam: float = 1.0, bias_idx: int = 0, scale: bool = True):
+    def __init__(
+        self, k: int = 12, lam: float = 1.0, bias_idx: int = 0, scale: bool = True
+    ):
         self.k = k
         self.lam = lam
         self.bias_idx = bias_idx

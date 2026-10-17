@@ -17,11 +17,11 @@ project-1/data/dataset_unzipped/dataset/{x_train.csv, y_train.csv, x_test.csv, s
 ## Current stage
 
 1. **The six functions.** Implemented / merged into `implementations.py`.
-2. **Sara FE (this branch).** Pipeline figé :
-   - `preprocess_sara.py` + `notebooks/research_sara/features_sara.txt` (54 brutes)
+2. **Feature engineering.** Pipeline figé :
+   - `preprocess.py` + `notebooks/feature_selection/selected_features.txt` (54 brutes)
    - `clinical_fe.py` — 7 extras `NO_DUP_EXTRAS` (sans redondance)
-   - `interactions_sara.py` — pairwise top-12
-   - `pipeline_sara.py` — entrée unique (`build_matrices`) → ~176 cols
+   - `interactions.py` — pairwise top-12
+   - `pipeline.py` — entrée unique (`build_matrices`) → ~176 cols
 3. **Models.** Logistic GD : $\gamma=0.5$, `max_iters` 3000–5000 + seuil F1 (OOF ~0.426).
 
 ## Who does what
@@ -43,10 +43,10 @@ compare at the meeting.
 |---|---|
 | `implementations.py` | the six required methods (graded, auto-imported) |
 | `helpers.py` | course helpers, do not modify |
-| `preprocess_sara.py` | preprocess Sara (fit train → apply test) |
+| `preprocess.py` | preprocessing (fit train → apply test) |
 | `clinical_fe.py` | 7 extras cliniques sans doublon |
-| `pipeline_sara.py` | Sara + extras → matrices |
-| `notebooks/` | exploration équipe + `research_sara/` (pipeline Sara) |
+| `pipeline.py` | preprocess + extras + interactions → matrices |
+| `notebooks/` | exploration équipe + `feature_selection/` (sélection des variables) |
 | `research/` | modèles au-delà des six méthodes : GBM NumPy, logistique large, mélanges (voir `research/README.md`) |
 | `latex-example-paper/` | the LaTeX template for the report |
 | `submissions/` | CSV AICrowd (ignorés par git) |
