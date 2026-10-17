@@ -47,6 +47,7 @@ compare at the meeting.
 | `clinical_fe.py` | 7 extras cliniques sans doublon |
 | `pipeline_sara.py` | Sara + extras → matrices |
 | `notebooks/` | exploration équipe + `research_sara/` (pipeline Sara) |
+| `research/` | modèles au-delà des six méthodes : GBM NumPy, logistique large, mélanges (voir `research/README.md`) |
 | `latex-example-paper/` | the LaTeX template for the report |
 | `submissions/` | CSV AICrowd (ignorés par git) |
 
