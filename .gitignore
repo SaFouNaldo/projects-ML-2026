@@ -8,6 +8,7 @@ project-1/data/*
 # CSVs are data by default, except the small shared tables we DO track
 *.csv
 !project-1/notebooks/*.csv
+!project-1/notebooks/feature_selection/*.csv
 
 # ---- Model outputs ----
 submissions/
@@ -41,6 +42,7 @@ env/
 # ---- Editors / OS ----
 .vscode/
 .idea/
+*.code-workspace
 .DS_Store
 Thumbs.db
 desktop.ini

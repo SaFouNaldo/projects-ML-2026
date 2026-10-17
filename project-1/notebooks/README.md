@@ -1,24 +1,30 @@
 # Notebooks
 
-`01_eda.ipynb` is the shared starting point: loading, label balance, missing
-values, BRFSS special codes, correlations with the label, per-feature plots,
-and the export of `feature_summary.csv`.
+## Exploration commune (conservée)
 
-**Each of us copies it** as `eda_<name>.ipynb` (`eda_yahya.ipynb`,
-`eda_sara.ipynb`, `eda_rania.ipynb`) and goes through the **whole** dataset:
-all 321 columns, with the BRFSS 2015 codebook at hand.
+| Fichier | Rôle |
+|---|---|
+| `01_prepare_data.ipynb` | point de départ partagé |
+| `02_cleaning_data.ipynb` | nettoyage / exploration équipe |
+| `dropped_columns.csv` / `features_columns.csv` | listes issues de l’exploration commune |
+| `brfss2015_rules_full.json` / `column_types.json` | références BRFSS |
 
-What to bring to the meeting:
+## Sélection des variables — `feature_selection/`
 
-- your filled `feature_summary_<name>.csv`: for each column, its type (ordinal /
-  nominal / continuous), the special codes, keep or drop, and a short note;
-- the columns you would drop (almost empty, near-duplicates, identifiers);
-- how you would fill the missing values, and which question blocks deserve a
-  "was answered" flag;
-- the transformations you believe matter, with the plot that convinced you.
+Pipeline figé (preprocess + 7 extras `NO_DUP_EXTRAS`) :
 
-At the meeting we merge the three versions into one pipeline, and only then
-write it as a shared `.py` module.
+| Fichier | Rôle |
+|---|---|
+| `feature_selection.ipynb` | EDA / sélection / grid F1 |
+| `selected_features.txt` | 54 colonnes brutes retenues |
+| `dropped_columns.csv` | colonnes écartées + raison |
+| `kept_columns.csv` | détail des 54 gardées |
 
-Housekeeping: clear the outputs before committing (Kernel -> Restart & Clear
-Output), and keep anything final out of the notebooks once the pipeline exists.
+Code associé (dossier `project-1/`) : `preprocess.py`, `clinical_fe.py`, `pipeline.py`.
+
+```python
+from pathlib import Path
+from pipeline import build_matrices
+
+Xtr, y, Xte, meta = build_matrices(Path("data/dataset_unzipped/dataset"))
+```
