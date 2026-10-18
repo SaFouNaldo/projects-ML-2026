@@ -1,0 +1,269 @@
+column,stage,reason,kept_instead,note
+BLDSTOOL,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CADULT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CASTHDX2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CASTHNO2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CCLGHOUS,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CELLFON2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CELLFON3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+COLGHOUS,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CPDEMO1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CSTATE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CTELENUM,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+CTELNUM1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+DISPCODE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+FC60_,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+FLSHTMY2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+FLUSHOT6,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+FMONTH,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HADHYST2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HADMAM,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HADPAP2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HADSGCO1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HADSIGM3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HHADULT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HIVTST6,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HIVTSTD3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HOWLONG,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HPLSTTST,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HPVADSHT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HPVADVC2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+HPVTEST,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+IDATE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+IDAY,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+IMFVPLAC,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+IMONTH,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+IYEAR,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+Id,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+LADULT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+LANDLINE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+LASTPAP2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+LASTSIG3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+LENGEXAM,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+LSTBLDS3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+MSCODE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+NUMADULT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+NUMHHOL2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+NUMMEN,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+NUMPHON2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+NUMWOMEN,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PAMISS1_,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PCDMDECN,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PCPSAAD2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PCPSADE1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PCPSADI1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PCPSARE1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PCPSARS1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PNEUVAC3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PROFEXAM,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PSATEST1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PSATIME,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PVTRESD1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+PVTRESD2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+QSTLANG,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+QSTVER,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+RCSGENDR,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+RCSRLTN2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+SEATBELT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+SEQNO,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+SHINGLE2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+STATERES,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+TETANUS,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+WHRTST10,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_AIDTST3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_CHISPNC,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_CLLCPWT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_CPRACE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_CRACE1,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_DUALCOR,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_DUALUSE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_FLSHOT6,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_FRT16,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_FRTRESP,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_FRUITEX,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_LLCPWT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_MISFRTN,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_MISVEGN,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_PNEUMO2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_PSU,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_RAWRAKE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_RFSEAT2,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_RFSEAT3,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_STRWT,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_STSTR,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_VEG23,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_VEGETEX,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_VEGRESP,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+_WT2RAKE,1_not_a_risk_factor,admin_phone_weights_screening_quality,,not a risk factor for MICHD
+ADANXEV,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADDOWN,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADEAT1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADENERGY,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADFAIL,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADMOVE,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADPLEASR,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADSLEEP,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ADTHINK,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ARTHEDU,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ARTHEXER,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ARTHWGT,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ARTTODAY,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASACTLIM,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASATTACK,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASDRVIST,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASERVIST,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASINHALR,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASNOSLEP,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASPUNSAF,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASRCHKUP,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASTHMAGE,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASTHMED3,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ASYMPTOM,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+BLDSUGAR,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CDASSIST,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CDDISCUS,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CDHELP,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CDHOUSE,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CDSOCIAL,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CHKHEMO3,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CRGVHOUS,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CRGVHRS1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CRGVLNG1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CRGVMST2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CRGVPERS,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CRGVPRB1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CRGVREL1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+CVDASPRN,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+DIABEDU,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+DIABEYE,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+DOCTDIAB,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+DRADVISE,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+EMTSUPRT,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+EYEEXAM,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+FEETCHK,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+FEETCHK2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+HAREHAB1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+INSULIN,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+LONGWTCH,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+LSATISFY,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+MISTMNT,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+RDUCHART,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+RDUCSTRK,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+RLIVPAIN,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+SCNTLPAD,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+SCNTLWK1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+SCNTPAID,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+SCNTWRK1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+STREHAB1,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VICTRCT4,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VIDFCLT2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VIEYEXM2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VIGLUMA2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VIINSUR2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VIMACDG2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VINOCRE2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VIPRFVS2,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+VIREDIF3,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+WTCHSALT,2_missing_ge_90pct,empty_plus_DK_refused_ge_90,,88 is not a missing value
+ACTIN11_,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+ARTHDIS2,3_correlation_ge_0.75,same_concept,_DRDXAR1,correlated >= 0.75 with _DRDXAR1
+ARTHSOCL,3_correlation_ge_0.75,same_concept,_DRDXAR1,correlated >= 0.75 with _DRDXAR1
+ASTHMA3,3_correlation_ge_0.75,same_concept,_ASTHMS1,correlated >= 0.75 with _ASTHMS1
+ASTHNOW,3_correlation_ge_0.75,same_concept,_ASTHMS1,correlated >= 0.75 with _ASTHMS1
+BLOODCHO,3_correlation_ge_0.75,same_concept,_CHOLCHK,correlated >= 0.75 with _CHOLCHK
+BPHIGH4,3_correlation_ge_0.75,same_concept,_RFHYPE5,correlated >= 0.75 with _RFHYPE5
+CHOLCHK,3_correlation_ge_0.75,same_concept,_CHOLCHK,correlated >= 0.75 with _CHOLCHK
+DRNK3GE5,3_correlation_ge_0.75,same_concept,_RFBING5,correlated >= 0.75 with _RFBING5
+DRNKANY5,3_correlation_ge_0.75,same_concept,ALCDAY5,correlated >= 0.75 with ALCDAY5
+DROCDY3_,3_correlation_ge_0.75,same_concept,ALCDAY5,correlated >= 0.75 with ALCDAY5
+EDUCA,3_correlation_ge_0.75,same_concept,_EDUCAG,correlated >= 0.75 with _EDUCAG
+EXERANY2,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+FRUTDA1_,3_correlation_ge_0.75,same_concept,_FRUTSUM,correlated >= 0.75 with _FRUTSUM
+GRENDAY_,3_correlation_ge_0.75,same_concept,_VEGESUM,correlated >= 0.75 with _VEGESUM
+HAVARTH3,3_correlation_ge_0.75,same_concept,_DRDXAR1,correlated >= 0.75 with _DRDXAR1
+HTIN4,3_correlation_ge_0.75,same_concept,HEIGHT3,correlated >= 0.75 with HEIGHT3
+HTM4,3_correlation_ge_0.75,same_concept,HEIGHT3,correlated >= 0.75 with HEIGHT3
+INCOME2,3_correlation_ge_0.75,same_concept,_INCOMG,correlated >= 0.75 with _INCOMG
+LMTJOIN3,3_correlation_ge_0.75,same_concept,_DRDXAR1,correlated >= 0.75 with _DRDXAR1
+MAXDRNKS,3_correlation_ge_0.75,same_concept,_RFBING5,correlated >= 0.75 with _RFBING5
+MAXVO2_,3_correlation_ge_0.75,same_concept,_AGE80,correlated >= 0.75 with _AGE80
+PA1MIN_,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+PA1VIGM_,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+PADUR1_,3_correlation_ge_0.75,same_concept,EXERHMM1,correlated >= 0.75 with EXERHMM1
+PADUR2_,3_correlation_ge_0.75,same_concept,EXERHMM2,correlated >= 0.75 with EXERHMM2
+PAMIN11_,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+PAMIN21_,3_correlation_ge_0.75,same_concept,ACTIN21_,correlated >= 0.75 with ACTIN21_
+PAVIG11_,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+PAVIG21_,3_correlation_ge_0.75,same_concept,ACTIN21_,correlated >= 0.75 with ACTIN21_
+SMOKDAY2,3_correlation_ge_0.75,same_concept,_SMOKER3,correlated >= 0.75 with _SMOKER3
+SMOKE100,3_correlation_ge_0.75,same_concept,_SMOKER3,correlated >= 0.75 with _SMOKER3
+STRENGTH,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+STRFREQ_,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+TOLDHI2,3_correlation_ge_0.75,same_concept,_RFCHOL,correlated >= 0.75 with _RFCHOL
+WTKG3,3_correlation_ge_0.75,same_concept,_BMI5,correlated >= 0.75 with _BMI5
+_AGE65YR,3_correlation_ge_0.75,same_concept,_AGE80,correlated >= 0.75 with _AGE80
+_AGEG5YR,3_correlation_ge_0.75,same_concept,_AGE80,correlated >= 0.75 with _AGE80
+_AGE_G,3_correlation_ge_0.75,same_concept,_AGE80,correlated >= 0.75 with _AGE80
+_BMI5CAT,3_correlation_ge_0.75,same_concept,_BMI5,correlated >= 0.75 with _BMI5
+_CASTHM1,3_correlation_ge_0.75,same_concept,_ASTHMS1,correlated >= 0.75 with _ASTHMS1
+_CHLDCNT,3_correlation_ge_0.75,same_concept,CHILDREN,correlated >= 0.75 with CHILDREN
+_DRNKWEK,3_correlation_ge_0.75,same_concept,ALCDAY5,correlated >= 0.75 with ALCDAY5
+_FRTLT1,3_correlation_ge_0.75,same_concept,_FRUTSUM,correlated >= 0.75 with _FRUTSUM
+_HCVU651,3_correlation_ge_0.75,same_concept,HLTHPLN1,correlated >= 0.75 with HLTHPLN1
+_HISPANC,3_correlation_ge_0.75,same_concept,_RACE,correlated >= 0.75 with _RACE
+_LMTACT1,3_correlation_ge_0.75,same_concept,_DRDXAR1,correlated >= 0.75 with _DRDXAR1
+_LMTSCL1,3_correlation_ge_0.75,same_concept,_DRDXAR1,correlated >= 0.75 with _DRDXAR1
+_LMTWRK1,3_correlation_ge_0.75,same_concept,_DRDXAR1,correlated >= 0.75 with _DRDXAR1
+_LTASTH1,3_correlation_ge_0.75,same_concept,_ASTHMS1,correlated >= 0.75 with _ASTHMS1
+_MINAC11,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_MINAC21,3_correlation_ge_0.75,same_concept,ACTIN21_,correlated >= 0.75 with ACTIN21_
+_MRACE1,3_correlation_ge_0.75,same_concept,_RACE,correlated >= 0.75 with _RACE
+_PA150R2,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_PA30021,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_PA300R2,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_PAINDX1,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_PAREC1,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_PASTAE1,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_PASTRNG,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_PRACE1,3_correlation_ge_0.75,same_concept,_RACE,correlated >= 0.75 with _RACE
+_RACEG21,3_correlation_ge_0.75,same_concept,_RACE,correlated >= 0.75 with _RACE
+_RACEGR3,3_correlation_ge_0.75,same_concept,_RACE,correlated >= 0.75 with _RACE
+_RACE_G1,3_correlation_ge_0.75,same_concept,_RACE,correlated >= 0.75 with _RACE
+_RFBMI5,3_correlation_ge_0.75,same_concept,_BMI5,correlated >= 0.75 with _BMI5
+_RFSMOK3,3_correlation_ge_0.75,same_concept,_SMOKER3,correlated >= 0.75 with _SMOKER3
+_TOTINDA,3_correlation_ge_0.75,same_concept,_PACAT1,correlated >= 0.75 with _PACAT1
+_VEGLT1,3_correlation_ge_0.75,same_concept,_VEGESUM,correlated >= 0.75 with _VEGESUM
+CVDSTRK3,3_label_leakage,possible_leakage_close_to_MICHD,,temporary drop (stroke too close to CHD)
+ACTIN21_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+AVEDRNK2,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+BEANDAY_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+CAREGIV1,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+CRGVEXPT,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+DIABAGE2,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+EXERHMM1,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+EXERHMM2,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+EXEROFT1,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+EXEROFT2,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+EXRACT11,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+EXRACT21,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+FRUIT1,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+FRUITJU1,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+FTJUDA1_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+FVBEANS,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+FVGREEN,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+FVORANG,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+HEIGHT3,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+JOINPAIN,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+LASTSMK2,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+METVL11_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+METVL21_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+ORNGDAY_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+PAFREQ1_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+PAFREQ2_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+PDIABTST,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+PREGNANT,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+STOPSMK2,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+VEGEDA1_,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+VEGETAB1,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+WEIGHT2,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2
+_STATE,4_domain_pass,remaining_topic_or_skip_or_STATE,,DROP_METIER; some reopened in v2

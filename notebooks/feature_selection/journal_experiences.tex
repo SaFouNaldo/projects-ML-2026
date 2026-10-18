@@ -1,0 +1,224 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.2cm}
+
+\title{Experiment log --- FE / MICHD models\\
+\large Team F1-Cardiaque \textperiodcentered{} Branch \texttt{sara/feature-engineering}}
+\author{Sara El Harti (+ session notes)}
+\date{Last updated: 6 October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent\textit{This is the log of the feature-engineering phase on the linear model.
+The final model (gradient boosting, \texttt{run.py}) came later; see \texttt{research/}
+and the README for its results.}
+
+\section{Conventions}
+\begin{itemize}
+  \item Decision metric: \textbf{F1} (positive class = MICHD).
+  \item Train prevalence: $28\,975 / 328\,135 \approx 8.83\,\%$.
+  \item Reference pipeline: \textbf{base} (54 raw $\to$ preprocess $\sim$103 cols)
+        + 7 extras \texttt{NO\_DUP\_EXTRAS} $\to$ $\sim$110 columns
+        (\texttt{pipeline.py}).
+  \item Reliable evaluation (since Oct.\ 2026): \textbf{stratified 5-fold OOF + IRLS},
+        F1 threshold on pooled OOF scores.
+  \item F1 noise (OOF bootstrap): $\sigma \approx 0.002$.
+        A variant is kept only if $\Delta\mathrm{F1} \gtrsim 0.005$
+        ($\approx 2\sigma$), unless stated otherwise.
+  \item Older measurements = multi-seed 80/20 holdout + GD logistic (noisier;
+        orders of magnitude only).
+\end{itemize}
+
+\section{Reference pipeline}
+\begin{tabular}{@{}llp{7.2cm}@{}}
+\toprule
+Component & File & Contents \\
+\midrule
+List of 54 raw & \texttt{selected\_features.txt} & Funnel: missing / redundancy / domain; no \texttt{CVDSTRK3} \\
+Preprocess & \texttt{preprocess.py} & Recode, 8 \texttt{\_\_isna}, impute, one-hot, scale, bias \\
+Extras & \texttt{clinical\_fe.py} & 7 extras not redundant with the base \\
+Single entry point & \texttt{pipeline.py} & \texttt{build\_matrices(...)} \\
+\bottomrule
+\end{tabular}
+
+\section{Baseline / frozen pipeline (IRLS + OOF)}
+\begin{center}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Setup & \#cols & F1 OOF & $\sigma$ fold & AUC OOF & PR-AUC \\
+\midrule
+Base + NO\_DUP\_EXTRAS & 110 & 0.4228 & 0.0012 & 0.8578 & 0.3846 \\
+\textbf{+ top-12 pairs (frozen)} & $\sim$176 & \textbf{0.4264} & --- & 0.8600 & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent Pipeline code: \texttt{pipeline.py} (+ \texttt{interactions.py}).
+Recommended GD: $\gamma=0.5$, $3000$--$5000$ iters.
+Former ref.\ without interactions: train$-$OOF gap $\approx +0.0015$.
+
+\section{Chronological log}
+
+\begin{longtable}{@{}p{2.4cm}p{5.0cm}ccp{3.8cm}@{}}
+\toprule
+Phase & Experiment & F1 (approx.) & Protocol & Verdict \\
+\midrule
+\endfirsthead
+\toprule
+Phase & Experiment & F1 & Protocol & Verdict \\
+\midrule
+\endhead
+
+early & Funnel $\to$ 54 raw (+ drop \texttt{CVDSTRK3}) & --- & domain & List frozen \\
+early & Preprocess + 8 selective \texttt{\_\_isna} & $\sim$0.41--0.42 & holdout GD & \textbf{Kept} \\
+early & Isna everywhere / random interactions & $\leq$ baseline & holdout & Rejected \\
+early & Undersample / reweighting & $\approx$ neutral & holdout & Rejected (expected) \\
+early & MSE / ridge vs logistic + F1 threshold & logistic wins & holdout & Logistic chosen \\
+early & Ensemble log + reg-log & $\sim$0.42 & holdout & Small gain \\
+early & Home-made MLP / GBM (trials) & no better & holdout & Not a priority \\
+Oct.\ 1 & Base only & $\sim$0.417 & multi-seed & Baseline FE \\
+Oct.\ 1 & Base + full clinical ($\sim$60) & $\sim$0.426--0.427 & multi-seed & Redundant \\
+Oct.\ 1 & Base + lean 10 scores & $\sim$0.424 & multi-seed & Redundant \\
+Oct.\ 1 & Replace atoms with scores & $\sim$0.385 & multi-seed & \textbf{Broken} \\
+Oct.\ 1 & Base + NO\_DUP\_EXTRAS (7) & $\sim$0.424 & multi-seed & \textbf{Kept} \\
+6 Oct & Univariate scan, 321 cols & --- & 5-fold AUC & Age proxies vs vaccines/HAVARTH3 \\
+6 Oct & Baseline IRLS OOF & 0.4228 & OOF IRLS & Reference \\
+6 Oct & Age $\to$ 5 bins only & 0.4217 & OOF IRLS & $\Delta=-0.001$: worse \\
+6 Oct & Continuous age + 5 bins & 0.4233 & OOF IRLS & $\Delta=+0.0005$: \textbf{noise} \\
+6 Oct & + \texttt{TOLDHI2} one-hot+NaN & 0.4231 & OOF IRLS & $\Delta=+0.0003$: noise \\
+6 Oct & + \texttt{PNEUVAC3} one-hot+NaN & 0.4246 & OOF IRLS & $\Delta=+0.0017$: small, $<2\sigma$ \\
+6 Oct & + \texttt{HAVARTH3} one-hot+NaN & 0.4228 & OOF IRLS & $\Delta=0$ \\
+6 Oct & + all 3 columns & 0.4246 & OOF IRLS & $\Delta=+0.0018$: \textbf{not kept} \\
+6 Oct & GENHLTH $\to$ one-hot & 0.4231 & OOF IRLS & $\Delta=+0.0002$: noise \\
+6 Oct & D3 stratified by age$\times$sex (6 models) & 0.4249 & OOF IRLS & $\Delta=+0.0020$: $<0.004$, no GBM \\
+6 Oct & + stratum dummies & 0.4240 & OOF IRLS & $\Delta=+0.0012$: noise \\
+6 Oct & Top-8/10/12 interactions pairwise & 0.4262--0.4264 & OOF IRLS & $\Delta=+0.0034$--$0.0036$: close to $2\sigma$ \\
+6 Oct & GD $\gamma$/iters + top-12 inter (holdout) & $\sim$0.432 & holdout GD & Tuning helps GD; to be confirmed with OOF \\
+\bottomrule
+\end{longtable}
+
+\section{Details --- top-$K$ interactions \& GD tuning (6 Oct.\ 2026)}
+Interactions = products of the $K$ columns with the largest $|w|$ (IRLS), excluding the bias.
+
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Setup (IRLS OOF) & F1 OOF & $\Delta$ & AUC \\
+\midrule
+Baseline & 0.4228 & --- & 0.8578 \\
+Top-8 pairs (+28) & 0.4262 & $+0.0034$ & 0.8598 \\
+Top-10 pairs (+45) & 0.4262 & $+0.0034$ & 0.8599 \\
+Top-12 pairs (+66) & 0.4264 & $+0.0036$ & 0.8600 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textit{GD (course code)} grid $\gamma\in\{0.05,0.1,0.5,1\}$,
+\texttt{max\_iters}$\in\{1000,3000,5000\}$ then checked on the 80\,\% train split:
+best config seen: $\gamma=0.5$, $5000$ iters, top-12 inter,
+holdout F1 $\approx 0.432$ (a more optimistic protocol than OOF).
+\textbf{Decision (6 Oct.): integrated into the frozen pipeline}
+(\texttt{interactions.TopKPairInteractions}, $K=12$).
+
+\section{D3 re-run vs frozen pipeline (176 cols)}
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Model & F1 OOF & $\Delta$ & Verdict \\
+\midrule
+Global (current pipeline) & 0.4264 & --- & --- \\
+6 age$\times$sex logistic models & 0.4260 & $-0.0004$ & \textbf{negative} (wins 1/5) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent No usable higher-order interactions beyond the top-12 pairs.
+\textbf{No home-made GBM.} D2 kitchen sink = optional, for the report only.
+
+\section{Details --- GENHLTH one-hot \& D3 (6 Oct.\ 2026)}
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Variant & F1 OOF & $\Delta$ & Verdict \\
+\midrule
+Baseline & 0.4228 & --- & --- \\
+GENHLTH $\to$ one-hot & 0.4231 & $+0.0002$ & not kept \\
+GENHLTH linear + OH & 0.4231 & $+0.0003$ & not kept \\
+6 age$\times$sex logistic models & 0.4249 & $+0.0020$ & $<0.004$: signal mostly \textbf{additive} \\
+Global + stratum dummies & 0.4240 & $+0.0012$ & not kept \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent Consequence: heavy interactions and a home-made GBM are not priorities.
+
+\section{Details --- adding TOLDHI2 / PNEUVAC3 / HAVARTH3 (6 Oct.\ 2026)}
+One-hot with NaN and DK (7/9) as levels; no imputation.
+\texttt{HLTHPLN1}/\texttt{MEDCOST}/\texttt{CHECKUP1} already in the base: not re-added.
+
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Variant & \#cols & F1 OOF & $\Delta$ & Folds $>$ baseline \\
+\midrule
+A baseline & 110 & 0.4228 & --- & --- \\
+B + TOLDHI2 & 114 & 0.4231 & $+0.0003$ & 4/5 \\
+C + PNEUVAC3 & 114 & 0.4246 & $+0.0017$ & 4/5 \\
+D + HAVARTH3 & 114 & 0.4228 & $0$ & 3/5 \\
+E + all 3 & 122 & 0.4246 & $+0.0018$ & 4/5 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textit{Reading:} \texttt{PNEUVAC3} carries (almost) all of the gain; all 3 together
+add nothing more. $\Delta\approx0.002 < 2\sigma$ (0.005) $\Rightarrow$
+\textbf{not integrated} into the frozen pipeline. Univariate signal $\neq$ marginal gain
+once age/comorbidities are already in the base.
+
+\section{Details --- age bins (6 Oct.\ 2026)}
+Bands: $<45$, $45$--$54$, $55$--$64$, $65$--$74$, $75+$.
+
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Variant & \#cols & F1 OOF & $\Delta$ vs A & AUC \\
+\midrule
+A continuous & 110 & 0.4228 & --- & 0.8578 \\
+B bins only & 114 & 0.4217 & $-0.0012$ & 0.8571 \\
+C continuous + bins & 115 & 0.4233 & $+0.0005$ & 0.8578 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textit{Team reading:} 0.4233 $>$ 0.4228 on the face of it, but
+$\Delta=+0.0005 < \sigma\approx0.002$. This is \textbf{not} a real gain.
+The pipeline is left unchanged. Scaled numeric age is enough.
+
+\section{Outside the base, univariate AUC $\ge 0.60$ (excerpt)}
+Many age proxies (\texttt{\_AGEG5YR}, \texttt{FC60\_}, \texttt{MAXVO2\_},\ldots).
+More promising leads: \texttt{PNEUVAC3}, \texttt{\_FLSHOT6}, \texttt{HAVARTH3}.
+Full file: \texttt{univariate\_auc\_scan.csv}.
+
+\section{Next steps}
+\begin{enumerate}
+  \item Add 1--3 non-redundant OUT columns (e.g.\ vaccines, \texttt{HAVARTH3}) + OOF.
+  \item Bins for \texttt{GENHLTH} / BMI / health days (optional).
+  \item Age$\times$sex interactions only if the gain is clear.
+  \item If still $\Delta\mathrm{F1}<0.005$: document the ceiling in the report.
+\end{enumerate}
+
+\section{Team rule}
+\begin{quote}
+Every new idea $=$ 5-fold OOF IRLS + $\Delta$ vs baseline 0.4228.
+If $|\Delta|<0.005$, log it here as negative/neutral and do not stack it.
+\end{quote}
+
+\noindent\textit{To compile:} in \texttt{notebooks/feature\_selection/}:
+\texttt{pdflatex journal\_experiences.tex}.
+
+\end{document}

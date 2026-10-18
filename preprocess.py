@@ -1,4 +1,4 @@
-"""Preprocessing v1 / v2 — NumPy only. Fit on train, apply the same stats on test."""
+"""Preprocessing v1 / v2, NumPy only. Fit on train, apply the same statistics to test."""
 
 from __future__ import annotations
 
@@ -8,26 +8,26 @@ from pathlib import Path
 import numpy as np
 
 _ROOT = Path(__file__).resolve().parent
-DATA = _ROOT / "data"
+DATA = _ROOT / "data" / "dataset_unzipped" / "dataset"
 FEATURES_PATH = _ROOT / "notebooks" / "feature_selection" / "selected_features.txt"
 
 NONE_TO_ZERO = {"PHYSHLTH", "MENTHLTH", "CHILDREN", "POORHLTH"}
 LOG1P = {"_FRUTSUM", "_VEGESUM"}
 
-# Indicateurs de trou (0/1) : seulement si le missing est informatif (skip / module).
-# Pas d'isna sur âge, SEX, etc. — trou ≈ bruit, pas un profil.
+# Missing indicators (0/1): only where a missing answer is informative (skip / module).
+# No indicator for age, SEX, etc.: a missing value there is noise, not a profile.
 MISSING_FLAG_COLS = {
-    "BPMEDS",  # posé seulement si HTA
-    "PREDIAB1",  # module / non-diabétiques
-    "POORHLTH",  # souvent lié à PHYSHLTH/MENTHLTH
-    "CIMEMLOS",  # module cognitif
-    "SCNTMNY1",  # module argent (souvent skip)
+    "BPMEDS",  # only asked if hypertensive
+    "PREDIAB1",  # module / non-diabetics only
+    "POORHLTH",  # often linked to PHYSHLTH/MENTHLTH
+    "CIMEMLOS",  # cognitive module
+    "SCNTMNY1",  # money module (often skipped)
     "SCNTMEL1",
-    "SXORIENT",  # souvent skip selon questionnaire / État
+    "SXORIENT",  # often skipped depending on questionnaire / state
     "TRNSGNDR",
 }
 
-# 1 = oui, 2 = non → on met 1 / 0
+# 1 = yes, 2 = no -> encoded as 1 / 0
 BINARY_YESNO = {
     "_DRDXAR1",
     "_RFBING5",
@@ -55,7 +55,7 @@ BINARY_YESNO = {
     "BPMEDS",
 }
 
-# 7 et 9 = NSP / refus
+# 7 and 9 = don't know / refused
 DK_79 = BINARY_YESNO | {
     "_PACAT1",
     "_ASTHMS1",
@@ -68,7 +68,7 @@ DK_79 = BINARY_YESNO | {
     "PREDIAB1",
 }
 
-# 7 est une vraie modalité (retraité, etc.)
+# 7 is a real answer here (retired, etc.)
 DK_9 = {
     "_EDUCAG",
     "_INCOMG",
@@ -118,7 +118,7 @@ def load_feature_names(path: Path = FEATURES_PATH) -> list[str]:
 
 
 def load_selected(x_path: Path, names: list[str]) -> np.ndarray:
-    """CSV → tableau de strings, uniquement les colonnes `names`."""
+    """CSV -> array of strings, only the columns in `names`."""
     with x_path.open(newline="") as f:
         reader = csv.reader(f)
         header = next(reader)
@@ -135,12 +135,12 @@ def load_y(y_path: Path) -> np.ndarray:
 
 
 def encode_y(y: np.ndarray) -> np.ndarray:
-    """Compétition -1/1 → logistic 0/1."""
+    """Competition labels -1/1 -> logistic 0/1."""
     return (y == 1).astype(np.float64)
 
 
 def decode_y(y01: np.ndarray) -> np.ndarray:
-    """0/1 → soumission -1/1."""
+    """0/1 -> submission labels -1/1."""
     return np.where(y01 >= 0.5, 1.0, -1.0)
 
 
@@ -159,7 +159,7 @@ def _is_dk(name: str, x: float) -> bool:
 
 
 def recode_alcday5(x: float) -> float:
-    """101–199 = jours/semaine, 201–299 = jours/mois, 888 = 0, 777/999 = trou."""
+    """101-199 = days per week, 201-299 = days per month, 888 = 0, 777/999 = missing."""
     if x == 888:
         return 0.0
     if x in (777, 999):
@@ -228,7 +228,7 @@ class Preprocessor:
         return col
 
     def _missing_flags(self, X: np.ndarray) -> tuple[np.ndarray, list[str]]:
-        """0/1 avant imputation — seulement MISSING_FLAG_COLS présentes dans `names`."""
+        """0/1 before imputation, only for the MISSING_FLAG_COLS present in `names`."""
         flags = []
         names_out = []
         for j, name in enumerate(self.names):

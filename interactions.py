@@ -1,20 +1,14 @@
-"""Interactions pairwise sur les top-K colonnes (|w| IRLS).
+"""Pairwise interactions of the top-K columns (largest |w| of an IRLS logistic fit).
 
-Fit sur train uniquement (indices + scale des produits), puis transform test.
+Fitted on the training rows only (column choice and scaling of the products),
+then applied to the test rows.
 """
 
 from __future__ import annotations
 
 import numpy as np
 
-
-def _sigmoid(z: np.ndarray) -> np.ndarray:
-    out = np.empty_like(z, dtype=np.float64)
-    pos = z >= 0
-    out[pos] = 1.0 / (1.0 + np.exp(-np.clip(z[pos], -50, 50)))
-    ez = np.exp(np.clip(z[~pos], -50, 50))
-    out[~pos] = ez / (1.0 + ez)
-    return out
+from implementations import sigmoid
 
 
 def _logreg_irls(
@@ -30,7 +24,7 @@ def _logreg_irls(
     R = lam * np.eye(d)
     R[bias_idx, bias_idx] = 0.0
     for _ in range(n_iter):
-        p = _sigmoid(X @ w)
+        p = sigmoid(X @ w)
         g = X.T @ (p - y01) + R @ w
         W = p * (1.0 - p)
         H = (X * W[:, None]).T @ X + R
@@ -45,7 +39,7 @@ def _logreg_irls(
 
 
 class TopKPairInteractions:
-    """Ajoute les produits x_i * x_j pour les K colonnes au plus fort |w|."""
+    """Adds the products x_i * x_j of the K columns with the largest |w|."""
 
     def __init__(
         self, k: int = 12, lam: float = 1.0, bias_idx: int = 0, scale: bool = True

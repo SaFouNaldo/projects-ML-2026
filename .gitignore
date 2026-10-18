@@ -1,17 +1,18 @@
 # ---- Data (never commit: too big, and provided by the course) ----
-project-1/data/*
-!project-1/data/.gitkeep
+data/*
+!data/.gitkeep
 *.zip
 *.npy
 *.npz
+!models/*.npz
 
 # CSVs are data by default, except the small shared tables we DO track
 *.csv
-!project-1/notebooks/*.csv
-!project-1/notebooks/feature_selection/*.csv
+!notebooks/feature_selection/*.csv
 
 # ---- Model outputs ----
 submissions/
+outputs/
 *.pkl
 weights/
 

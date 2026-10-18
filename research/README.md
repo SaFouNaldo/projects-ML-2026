@@ -8,9 +8,9 @@ Test scores are the mean of the 5 fold models.
 
 ## Data and outputs
 
-- Input: `project-1/data/dataset_unzipped/dataset/` (same as the rest of the repo).
-- Cache (raw matrices, bins, OOF and test scores): `project-1/data/cache/research/`.
-- Submissions: `project-1/submissions/research/`.
+- Input: `data/dataset_unzipped/dataset/` (same as the rest of the repo).
+- Cache (raw matrices, bins, OOF and test scores): `data/cache/research/`.
+- Submissions: `submissions/research/`.
 
 All three are ignored by git. Run the scripts from this folder.
 
@@ -31,7 +31,7 @@ All three are ignored by git. Run the scripts from this folder.
 ## Commands
 
 ```bash
-cd project-1/research
+cd research
 
 python cv_logistic.py                    # ~2 min
 python cv_six_methods.py                 # ~12 min
@@ -46,6 +46,9 @@ python cv_gbm.py v2noleak --trees 500  --depth 5 --lr 0.05 --bins v2 --drop HARE
 python blend_weights.py C_gbm_d5 gbm_d5_t500
 python bag_equal.py H_bag4 gbm_d5_t500 gbm_v2ctrl_t500 gbm_v2s1_t1000 gbm_v2s2_t1000
 ```
+
+The last command is the final submission. `run.py` at the root of the repository
+trains the same four GBM and writes the same average in one command.
 
 Each GBM run takes 30 to 60 minutes. `--bins v1` uses the raw codes;
 `--bins v2` recodes the BRFSS "none" answers (88 / 888 / 8888) to 0 and adds

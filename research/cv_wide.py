@@ -5,7 +5,8 @@ import time
 
 import numpy as np
 
-from common import CACHE, folds, load_raw, report, save_scores, sigmoid
+from common import CACHE, folds, load_raw, report, save_scores
+from implementations import sigmoid
 from wide import WideEncoder, adam_logistic
 
 t0 = time.time()

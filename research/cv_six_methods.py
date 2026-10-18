@@ -34,7 +34,6 @@ for tr, va in fl:
     splits.append((tr, va, inter.fit_transform(X[tr], y[tr]), inter.transform(X[va])))
 print(f"matrices ready {time.time() - t0:.0f}s", flush=True)
 
-np.random.seed(42)
 methods = {
     "least_squares": lambda A, b: least_squares(b, A),
     "ridge lam=1e-6": lambda A, b: ridge_regression(b, A, 1e-6),
@@ -64,6 +63,9 @@ only = sys.argv[1:]
 for name, fit in methods.items():
     if only and not any(s in name for s in only):
         continue
+    # same random draws for every method, so each line can be reproduced on its own
+    # (e.g. `python cv_six_methods.py sgd`), whatever ran before it
+    np.random.seed(42)
     oof = np.zeros(len(y))
     ok = True
     for tr, va, A, V in splits:

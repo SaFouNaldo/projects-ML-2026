@@ -7,10 +7,13 @@ import numpy as np
 NB = 64  # bin 0 = missing, bins 1..63 = values
 
 
-def recode_none_codes(X, ref):
-    """BRFSS 'none' codes (88 / 888 / 8888 when the column max is 99 / 999 / 9999) -> 0."""
-    X = X.copy()
-    for j in range(X.shape[1]):
+def none_codes(ref):
+    """BRFSS 'none' code of each column of the training matrix `ref`, 0 if there is none.
+
+    The code is 88 / 888 / 8888 when the largest value of the column is 99 / 999 / 9999.
+    """
+    codes = np.zeros(ref.shape[1], dtype=np.int64)
+    for j in range(ref.shape[1]):
         r = ref[:, j]
         r = r[np.isfinite(r)]
         if len(r) == 0:
@@ -18,7 +21,16 @@ def recode_none_codes(X, ref):
         mx = r.max()
         for top, none in ((99, 88), (999, 888), (9999, 8888)):
             if mx == top:
-                X[X[:, j] == none, j] = 0.0
+                codes[j] = none
+    return codes
+
+
+def recode_none(X, codes):
+    """Replaces the 'none' code of each column (see none_codes) by 0."""
+    X = X.copy()
+    for j, code in enumerate(codes):
+        if code:
+            X[X[:, j] == code, j] = 0.0
     return X
 
 
@@ -154,3 +166,45 @@ class GBM:
         for levels, leaf in self.trees[: n_trees or len(self.trees)]:
             F += self._apply(B, levels, leaf)
         return F
+
+    def to_arrays(self):
+        """The fitted trees as flat arrays, to save them with np.savez.
+
+        For each tree, the split feature, bin threshold and missing-side flag of all
+        its nodes (level by level: 1 + 2 + 4 + ... nodes) and the values of its leaves.
+        """
+        return {
+            "base": np.array(self.base),
+            "feature": np.array(nodes_of(self.trees, 0), dtype=np.int16),
+            "threshold": np.array(nodes_of(self.trees, 1), dtype=np.uint8),
+            "missing_right": np.array(nodes_of(self.trees, 2), dtype=bool),
+            "leaf": np.array([leaf for _, leaf in self.trees]),
+        }
+
+    @classmethod
+    def from_arrays(cls, d):
+        """Rebuilds a fitted model from the output of to_arrays (prediction only)."""
+        model = cls(n_trees=len(d["leaf"]))
+        model.base = float(d["base"])
+        n_nodes = d["feature"].shape[1]
+        model.depth = int(np.log2(n_nodes + 1))
+        model.trees = []
+        for t in range(len(d["leaf"])):
+            levels, start = [], 0
+            for level in range(model.depth):
+                end = start + (1 << level)
+                levels.append(
+                    (
+                        d["feature"][t, start:end].astype(np.int64),
+                        d["threshold"][t, start:end].astype(np.int64),
+                        d["missing_right"][t, start:end],
+                    )
+                )
+                start = end
+            model.trees.append((levels, d["leaf"][t]))
+        return model
+
+
+def nodes_of(trees, k):
+    """Element k (0 feature, 1 threshold, 2 missing side) of every node, tree by tree."""
+    return [np.concatenate([lv[k] for lv in levels]) for levels, _ in trees]

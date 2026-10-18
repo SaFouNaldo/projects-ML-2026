@@ -1,16 +1,16 @@
-"""Extras cliniques sans redondance avec le preprocess de base.
+"""Clinical extra features that do not duplicate the base preprocessing.
 
-Pipeline retenu
----------------
-Base (54 brutes → preprocess → ~103 cols)
-+ NO_DUP_EXTRAS (7 cols) :
-  - stroke, insulin : info absente de selected_features
+Retained pipeline
+-----------------
+Base (54 raw columns -> preprocess -> ~103 columns)
++ NO_DUP_EXTRAS (7 columns):
+  - stroke, insulin: information missing from selected_features
   - hta_untreated, diab_x_female, risk_x_care, high_risk_low_care,
-    silent_highrisk_phenotype : interactions / phénotypes
-    (ascvd et care sont calculés en interne, pas ajoutés comme colonnes)
+    silent_highrisk_phenotype: interactions / phenotypes
+    (the ascvd and care scores are computed internally, not added as columns)
 
-Ne pas empiler ascvd_points / care_access_score / metabolic_* sur la base :
-ils résument des variables déjà présentes.
+Do not stack ascvd_points / care_access_score / metabolic_* on top of the base:
+they summarise variables that are already present.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from pathlib import Path
 
 import numpy as np
 
-# Colonnes brutes nécessaires pour construire les 7 extras
+# Raw columns needed to build the 7 extra features
 REQUIRED_COLS = [
     "_AGE80",
     "SEX",
@@ -44,7 +44,7 @@ REQUIRED_COLS = [
     "CHECKUP1",
 ]
 
-# Version figée (celle qui a marché en CV ~0.424)
+# Frozen version (the one that worked in CV, ~0.424)
 NO_DUP_EXTRAS = [
     "stroke",
     "insulin",
@@ -84,7 +84,7 @@ def _yesno(v: np.ndarray, yes: float = 1.0, no: float = 2.0) -> np.ndarray:
 
 
 def build_nodup_extras(X: np.ndarray, cols: list[str]) -> tuple[np.ndarray, list[str]]:
-    """Construit uniquement les 7 extras NO_DUP (peut contenir NaN)."""
+    """Builds only the 7 NO_DUP extra features (may contain NaN)."""
     ix = {n: i for i, n in enumerate(cols)}
 
     def c(n: str) -> np.ndarray:
@@ -131,7 +131,7 @@ def build_nodup_extras(X: np.ndarray, cols: list[str]) -> tuple[np.ndarray, list
     gh = c("GENHLTH")
     diffwalk = _yesno(c("DIFFWALK"))
 
-    # Scores internes (non exportés) pour risk_x_care / high_risk_low_care
+    # Internal scores (not exported) used by risk_x_care / high_risk_low_care
     ascvd = (
         0.07 * np.nan_to_num(age, nan=55.0)
         + 2.0 * sex_male
@@ -185,7 +185,7 @@ def build_nodup_extras(X: np.ndarray, cols: list[str]) -> tuple[np.ndarray, list
 
 
 class ClinicalFE:
-    """Fit train (médiane / mean / std) puis transform — extras NO_DUP uniquement."""
+    """Fit on train (median / mean / std), then transform; NO_DUP extra features only."""
 
     def __init__(self, add_bias: bool = False):
         self.add_bias = add_bias

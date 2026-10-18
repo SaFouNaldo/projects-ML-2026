@@ -16,7 +16,6 @@ Log : mean(log(1 + exp(tx @ w)) - y * (tx @ w))
 
 import numpy as np
 
-
 # ---------------------------------------------------------------------------
 # Shared helpers  (MSE pair: Rania -- logistic pair: Yahya)
 # ---------------------------------------------------------------------------
@@ -48,7 +47,7 @@ def compute_mse_gradient(y, tx, w):
 
 
 def sigmoid(z):
-    """Numerically stable logistic sigmoid"""
+    """Numerically stable logistic sigmoid."""
     z = np.asarray(z, dtype=float)
     e = np.exp(-np.abs(z))
     return np.where(z >= 0, 1 / (1 + e), e / (1 + e))
@@ -59,13 +58,24 @@ def compute_logistic_loss(y, tx, w):
 
     Args:
         y: shape (N,), values in {0, 1}
+        tx: shape (N, D)
+        w: shape (D,)
+
+    Returns:
+        float: mean(log(1 + exp(tx @ w)) - y * (tx @ w))
     """
-    raise NotImplementedError
+    z = tx @ w
+    # log(1 + exp(z)) written as logaddexp(0, z) so that a large z does not overflow
+    return np.mean(np.logaddexp(0, z) - y * z)
 
 
 def compute_logistic_gradient(y, tx, w):
-    """Gradient of ``compute_logistic_loss`` with respect to w."""
-    raise NotImplementedError
+    """Gradient of ``compute_logistic_loss`` with respect to w.
+
+    Returns:
+        np.ndarray of shape (D,): tx.T @ (sigmoid(tx @ w) - y) / N
+    """
+    return tx.T @ (sigmoid(tx @ w) - y) / len(y)
 
 
 # ---------------------------------------------------------------------------
@@ -188,15 +198,9 @@ def logistic_regression(y, tx, initial_w, max_iters, gamma):
         (w, loss): last weight vector and its logistic loss.
     """
     w = initial_w
-    (N, _) = tx.shape
     for _ in range(max_iters):
-        gradient = (1 / N) * (tx.T @ (sigmoid(tx @ w) - y))
-        # UPDATE
-        w = w - gamma * gradient
-    z = tx @ w
-    # preventing overflow
-    loss = np.mean(np.logaddexp(0, z) - y * z)
-    return (w, loss)
+        w = w - gamma * compute_logistic_gradient(y, tx, w)
+    return w, compute_logistic_loss(y, tx, w)
 
 
 # ---------------------------------------------------------------------------
@@ -218,12 +222,9 @@ def reg_logistic_regression(y, tx, lambda_, initial_w, max_iters, gamma):
         (w, loss): last weight vector and its logistic loss without the penalty.
     """
     w = initial_w
-    (N, _) = tx.shape
     for _ in range(max_iters):
-        gradient = (1 / N) * (tx.T @ (sigmoid(tx @ w) - y)) + 2 * lambda_ * w
-        # UPDATE
+        # gradient of the penalized objective: logistic gradient + 2 * lambda_ * w
+        gradient = compute_logistic_gradient(y, tx, w) + 2 * lambda_ * w
         w = w - gamma * gradient
-    z = tx @ w
-    # preventing overflow
-    loss = np.mean(np.logaddexp(0, z) - y * z)
-    return (w, loss)
+    # the returned loss does not include the penalty term
+    return w, compute_logistic_loss(y, tx, w)

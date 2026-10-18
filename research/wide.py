@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from implementations import sigmoid
+
 DROP = {"SEQNO", "_PSU", "IDATE", "IYEAR", "IDAY", "_STSTR", "CTELENUM", "CTELNUM1"}
 FORCE_CATEGORICAL = {"_STATE"}
 MIN_LEVEL = 300
@@ -94,7 +96,7 @@ def adam_logistic(Z, y, lam=1e-4, iters=400, lr=0.05, w0=None, b0=None, verbose=
     b1, b2, eps = 0.9, 0.999, 1e-8
     for t in range(1, iters + 1):
         z = Z @ w + b
-        p = 0.5 * (1.0 + np.tanh(0.5 * z))
+        p = sigmoid(z).astype(np.float32)  # stay in float32: Z is large
         r = (p - y32) / n
         g = Z.T @ r + 2 * lam * w
         gb = float(r.sum())

@@ -9,8 +9,8 @@ import time
 
 import numpy as np
 
-from common import CACHE, folds, load_raw, report, save_scores
-from gbm import GBM, apply_bins, make_bins, recode_none_codes
+from common import folds, load_bins, load_raw, report, save_scores
+from gbm import GBM
 from wide import DROP
 
 ap = argparse.ArgumentParser()
@@ -28,33 +28,8 @@ ap.add_argument("--drop", nargs="*", default=[], help="raw column names to remov
 a = ap.parse_args()
 
 
-def alcday_per_month(v):
-    out = np.full(v.shape, np.nan)
-    out[v == 888] = 0.0
-    wk = (v >= 101) & (v <= 199)
-    mo = (v >= 201) & (v <= 299)
-    out[wk] = (v[wk] - 100) * 30.0 / 7.0
-    out[mo] = v[mo] - 200
-    return out
-
-
 t0 = time.time()
-bf = CACHE / f"bins_{a.bins}.npz"
-if not bf.exists():
-    X, XT, y, ids, hdr = load_raw()
-    keep = [j for j, c in enumerate(hdr) if c not in DROP]
-    A, AT = X[:, keep], XT[:, keep]
-    if a.bins == "v2":
-        ja = hdr.index("ALCDAY5")
-        A = np.column_stack([recode_none_codes(A, A), alcday_per_month(X[:, ja])])
-        AT = np.column_stack(
-            [recode_none_codes(AT, X[:, keep]), alcday_per_month(XT[:, ja])]
-        )
-    edges = make_bins(A)
-    np.savez(bf, B=apply_bins(A, edges), BT=apply_bins(AT, edges), y=y, ids=ids)
-    del X, XT, A, AT
-d = np.load(bf)
-B, BT, y = d["B"], d["BT"], d["y"]
+B, BT, y, _ = load_bins(a.bins)
 if a.drop:
     hdr = load_raw()[4]
     cols = [c for c in hdr if c not in DROP] + (

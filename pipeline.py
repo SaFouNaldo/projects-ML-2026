@@ -1,11 +1,11 @@
-"""Pipeline figé : preprocess de base + NO_DUP_EXTRAS + top-12 interactions.
+"""Frozen pipeline: base preprocessing + NO_DUP_EXTRAS + top-12 interactions.
 
 Usage
 -----
 from pipeline import build_matrices
 tx, y, te, meta = build_matrices(data_dir)
-# tx / te : matrices prêtes pour logistic_regression
-# hyperparams GD recommandés (holdout) : gamma=0.5, max_iters=3000..5000
+# tx / te: matrices ready for logistic_regression
+# recommended GD hyperparameters (holdout): gamma=0.5, max_iters=3000..5000
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ from preprocess import Preprocessor, build_train_test
 ROOT = Path(__file__).resolve().parent
 FEATURES_PATH = ROOT / "notebooks" / "feature_selection" / "selected_features.txt"
 
-# Figé après OOF IRLS (Δ F1 ≈ +0.0036 vs base+NO_DUP seuls)
+# Frozen after OOF IRLS (F1 +0.0036 vs base + NO_DUP alone)
 TOP_K_INTERACTIONS = 12
 
 
@@ -30,10 +30,10 @@ def build_matrices(
     features_path: Path = FEATURES_PATH,
     top_k: int = TOP_K_INTERACTIONS,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict]:
-    """Retourne (X_train, y, X_test, meta).
+    """Returns (X_train, y, X_test, meta).
 
-    X = [preprocess de base | 7 extras NO_DUP | pairwise top-K]
-    Biais déjà inclus ; pas de second biais.
+    X = [base preprocessing | 7 NO_DUP extra features | pairwise top-K]
+    The bias column is already included; no second bias is added.
     """
     data_dir = Path(data_dir)
     tx, y, te, pp = build_train_test(

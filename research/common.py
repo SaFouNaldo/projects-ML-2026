@@ -26,6 +26,7 @@ def load_raw():
     if f.exists():
         d = np.load(f, allow_pickle=False)
         return d["X"], d["XT"], d["y"], d["ids"], list(d["hdr"])
+    print("reading the raw CSV files (first run only, a few minutes) ...", flush=True)
     hdr = (DATA / "x_train.csv").open().readline().strip().split(",")
     X = np.genfromtxt(DATA / "x_train.csv", delimiter=",", skip_header=1)
     XT = np.genfromtxt(DATA / "x_test.csv", delimiter=",", skip_header=1)
@@ -36,6 +37,77 @@ def load_raw():
     X, XT, hdr = X[:, 1:], XT[:, 1:], hdr[1:]
     np.savez(f, X=X, XT=XT, y=y, ids=ids, hdr=np.array(hdr))
     return X, XT, y, ids, hdr
+
+
+def alcday_per_month(v):
+    """ALCDAY5 in drinking days per month: 1xx = days per week, 2xx = days per month, 888 = none."""
+    out = np.full(v.shape, np.nan)
+    out[v == 888] = 0.0
+    wk = (v >= 101) & (v <= 199)
+    mo = (v >= 201) & (v <= 299)
+    out[wk] = (v[wk] - 100) * 30.0 / 7.0
+    out[mo] = v[mo] - 200
+    return out
+
+
+def fit_binning(X, hdr, version):
+    """Binning of the raw columns for the GBM, fitted on the training matrix X.
+
+    The identifiers, dates and survey-design columns listed in wide.DROP are removed.
+    v1: the raw BRFSS codes are binned as they are.
+    v2: the "none" answers (88 / 888 / 8888) are recoded to 0 first, and ALCDAY5
+        converted to days per month is added as a last column.
+    The bin edges are quantiles of the training rows. Returns a dict that
+    apply_binning uses to bin any matrix with the same columns (train or test).
+    """
+    from gbm import make_bins, none_codes
+    from wide import DROP
+
+    spec = {"version": version, "columns": [c for c in hdr if c not in DROP]}
+    A = X[:, [hdr.index(c) for c in spec["columns"]]]
+    if version == "v2":
+        spec["none_codes"] = none_codes(A)
+    spec["edges"] = make_bins(_binning_input(X, hdr, spec, A))
+    return spec
+
+
+def _binning_input(X, hdr, spec, A=None):
+    """The kept columns of X, with the v2 recoding when the spec asks for it."""
+    from gbm import recode_none
+
+    if A is None:
+        A = X[:, [hdr.index(c) for c in spec["columns"]]]
+    if spec["version"] == "v2":
+        A = np.column_stack(
+            [
+                recode_none(A, spec["none_codes"]),
+                alcday_per_month(X[:, hdr.index("ALCDAY5")]),
+            ]
+        )
+    return A
+
+
+def apply_binning(X, hdr, spec):
+    """Bins the raw matrix X (columns named by hdr) with a spec from fit_binning."""
+    from gbm import apply_bins
+
+    return apply_bins(_binning_input(X, hdr, spec), spec["edges"])
+
+
+def load_bins(version="v1"):
+    """Binned training and test matrices for the GBM, cached in CACHE/bins_<version>.npz.
+
+    See fit_binning for the binning itself. Returns (B, BT, y, ids).
+    """
+    f = CACHE / f"bins_{version}.npz"
+    if not f.exists():
+        X, XT, y, ids, hdr = load_raw()
+        print(f"binning the columns ({version}, first run only) ...", flush=True)
+        spec = fit_binning(X, hdr, version)
+        B, BT = apply_binning(X, hdr, spec), apply_binning(XT, hdr, spec)
+        np.savez(f, B=B, BT=BT, y=y, ids=ids)
+    d = np.load(f)
+    return d["B"], d["BT"], d["y"], d["ids"]
 
 
 def folds(y, k=K, seed=SEED):
@@ -117,7 +189,3 @@ def write_submission(name, ids, test_pred_bool, note=""):
         flush=True,
     )
     return path
-
-
-def sigmoid(z):
-    return 0.5 * (1.0 + np.tanh(0.5 * z))
