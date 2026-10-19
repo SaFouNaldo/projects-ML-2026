@@ -50,10 +50,11 @@ def alcday_per_month(v):
     return out
 
 
-def fit_binning(X, hdr, version):
+def fit_binning(X, hdr, version, drop=()):
     """Binning of the raw columns for the GBM, fitted on the training matrix X.
 
-    The identifiers, dates and survey-design columns listed in wide.DROP are removed.
+    The identifiers, dates and survey-design columns listed in wide.DROP are removed,
+    and so are the columns in `drop` (run.py removes the leaking HAREHAB1).
     v1: the raw BRFSS codes are binned as they are.
     v2: the "none" answers (88 / 888 / 8888) are recoded to 0 first, and ALCDAY5
         converted to days per month is added as a last column.
@@ -63,7 +64,10 @@ def fit_binning(X, hdr, version):
     from gbm import make_bins, none_codes
     from wide import DROP
 
-    spec = {"version": version, "columns": [c for c in hdr if c not in DROP]}
+    spec = {
+        "version": version,
+        "columns": [c for c in hdr if c not in DROP and c not in drop],
+    }
     A = X[:, [hdr.index(c) for c in spec["columns"]]]
     if version == "v2":
         spec["none_codes"] = none_codes(A)
@@ -94,16 +98,18 @@ def apply_binning(X, hdr, spec):
     return apply_bins(_binning_input(X, hdr, spec), spec["edges"])
 
 
-def load_bins(version="v1"):
-    """Binned training and test matrices for the GBM, cached in CACHE/bins_<version>.npz.
+def load_bins(version="v1", drop=()):
+    """Binned training and test matrices for the GBM, cached in CACHE/bins_<name>.npz.
 
-    See fit_binning for the binning itself. Returns (B, BT, y, ids).
+    See fit_binning for the binning itself; `drop` lists extra columns to remove
+    (the cache name then ends with _no<column>). Returns (B, BT, y, ids).
     """
-    f = CACHE / f"bins_{version}.npz"
+    name = version + "".join(f"_no{c}" for c in sorted(drop))
+    f = CACHE / f"bins_{name}.npz"
     if not f.exists():
         X, XT, y, ids, hdr = load_raw()
-        print(f"binning the columns ({version}, first run only) ...", flush=True)
-        spec = fit_binning(X, hdr, version)
+        print(f"binning the columns ({name}, first run only) ...", flush=True)
+        spec = fit_binning(X, hdr, version, drop)
         B, BT = apply_binning(X, hdr, spec), apply_binning(XT, hdr, spec)
         np.savez(f, B=B, BT=BT, y=y, ids=ids)
     d = np.load(f)
@@ -111,6 +117,11 @@ def load_bins(version="v1"):
 
 
 def folds(y, k=K, seed=SEED):
+    """Stratified k folds, reproducible with `seed`.
+
+    The rows of each class are shuffled and split into k parts, so every fold has the
+    same share of positives. Returns a list of (training rows, held-out rows).
+    """
     rng = np.random.default_rng(seed)
     parts = []
     for label in (0.0, 1.0):
@@ -124,6 +135,7 @@ def folds(y, k=K, seed=SEED):
 
 
 def f1(y, pred):
+    """F1 score of the positive class, for boolean predictions and labels y in {0, 1}."""
     yt = y == 1
     tp = np.sum(pred & yt)
     fp = np.sum(pred & ~yt)
@@ -143,6 +155,12 @@ def best_thr(y, s):
 
 
 def report(name, y, oof, fl):
+    """Prints and returns the cross-validated metrics of out-of-fold scores.
+
+    pooled: one F1-optimal threshold for all rows; nested: the threshold of each fold
+    is chosen on the other folds (honest estimate); folds: mean and std of the
+    per-fold F1 at the pooled threshold. Returns (threshold, pooled F1, nested F1, AUC).
+    """
     thr, f_pool = best_thr(y, oof)
     nested = np.zeros(len(y), dtype=bool)
     for tr, va in fl:
@@ -160,6 +178,7 @@ def report(name, y, oof, fl):
 
 
 def auc_score(y, s):
+    """Area under the ROC curve, with the rank-sum (Mann-Whitney) formula."""
     order = np.argsort(s, kind="mergesort")
     ranks = np.empty(len(s))
     ranks[order] = np.arange(1, len(s) + 1)
@@ -169,15 +188,18 @@ def auc_score(y, s):
 
 
 def save_scores(name, oof, test):
+    """Saves the OOF and test scores of an experiment in CACHE/scores_<name>.npz."""
     np.savez(CACHE / f"scores_{name}.npz", oof=oof, test=test)
 
 
 def load_scores(name):
+    """Loads the OOF and test scores saved by save_scores."""
     d = np.load(CACHE / f"scores_{name}.npz")
     return d["oof"], d["test"]
 
 
 def write_submission(name, ids, test_pred_bool, note=""):
+    """Writes SUBS/<name>.csv: 1 where test_pred_bool is True, -1 elsewhere."""
     pred = np.where(test_pred_bool, 1, -1)
     path = SUBS / f"{name}.csv"
     with open(path, "w") as fh:

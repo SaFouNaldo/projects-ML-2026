@@ -20,6 +20,7 @@ harehab_t = np.isfinite(XT[:, hdr.index("HAREHAB1")])
 
 
 def to_logit(s):
+    """Scores in [0, 1] (probabilities) -> logits; other scores are returned as they are."""
     if s.min() >= 0 and s.max() <= 1:
         s = np.log(np.clip(s, 1e-7, 1 - 1e-7) / np.clip(1 - s, 1e-7, 1))
     return s

@@ -14,7 +14,19 @@ N_QUANT = 64
 
 
 class WideEncoder:
+    """Generic encoding of all raw columns (except DROP), fitted on the training rows.
+
+    For each column: a missing indicator if the column is partly empty; one-hot of
+    the values seen at least MIN_LEVEL times (small categorical columns), or of the
+    frequent "spike" values such as the codes 77 / 88 / 99; for the remaining
+    numeric values, their quantile rank u in [0, 1] and (u - 0.5)^2. Then
+    standardisation.
+    """
+
     def fit(self, X, hdr):
+        """Chooses the encoding of each column from the training matrix X (columns hdr)
+        and learns the standardisation.
+        """
         self.specs = []
         n = len(X)
         for j, name in enumerate(hdr):
@@ -54,6 +66,7 @@ class WideEncoder:
         return self
 
     def _raw(self, X):
+        """Encoded matrix (float32) before standardisation; also sets self.names."""
         cols, names = [], []
         for s in self.specs:
             v = X[:, s["j"]]
@@ -78,6 +91,7 @@ class WideEncoder:
         return np.column_stack(cols).astype(np.float32)
 
     def transform(self, X):
+        """Encoded and standardised matrix of X."""
         Z = self._raw(X)
         Z -= self.mean.astype(np.float32)
         Z /= self.std.astype(np.float32)

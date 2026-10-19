@@ -53,6 +53,7 @@ def make_bins(X, max_bins=NB - 1):
 
 
 def apply_bins(X, edges):
+    """Bin index of every value: 0 if missing, 1..63 from the edges of its column (uint8)."""
     B = np.zeros(X.shape, dtype=np.uint8)
     for j, e in enumerate(edges):
         v = X[:, j]
@@ -62,6 +63,14 @@ def apply_bins(X, edges):
 
 
 class GBM:
+    """Gradient boosting of depth-limited trees for the log-loss, on binned data.
+
+    Trees are grown level by level: the histograms of gradients and hessians of all
+    nodes and columns of a level are built with one np.bincount, and each node takes
+    the split with the best Newton gain, sending missing values (bin 0) to the better
+    side. Each tree is grown on a random share of the rows and of the columns.
+    """
+
     def __init__(
         self,
         n_trees=500,
@@ -73,11 +82,22 @@ class GBM:
         col_sub=0.5,
         seed=42,
     ):
+        """n_trees: number of trees; depth: depth of each tree; lr: learning rate
+        (shrinkage of the leaf values); lam: L2 penalty on the leaf values; min_hess:
+        minimum sum of hessians in each child; row_sub / col_sub: share of rows / columns
+        drawn for each tree; seed: random seed of these draws.
+        """
         self.n_trees, self.depth, self.lr, self.lam = n_trees, depth, lr, lam
         self.min_hess, self.row_sub, self.col_sub = min_hess, row_sub, col_sub
         self.seed = seed
 
     def _tree(self, B, g, h, rng):
+        """Grows one tree on the gradients g and hessians h of the log-loss.
+
+        Returns, for each level, the split feature, bin threshold and missing side of
+        every node, the leaf values (already multiplied by lr) and the leaf of every
+        training row.
+        """
         n, F = B.shape
         S = np.flatnonzero(rng.random(n) < self.row_sub)
         C = np.sort(rng.choice(F, max(1, int(self.col_sub * F)), replace=False))
@@ -133,6 +153,7 @@ class GBM:
 
     @staticmethod
     def _apply(B, levels, leaf):
+        """Leaf value of every row of B for one tree."""
         n = len(B)
         node = np.zeros(n, dtype=np.int64)
         rows = np.arange(n)
@@ -142,6 +163,12 @@ class GBM:
         return leaf[node]
 
     def fit(self, B, y, B_eval=None, checkpoints=()):
+        """Boosting on the binned matrix B with labels y in {0, 1}.
+
+        Starts from the log-odds of the positive rate. If B_eval is given, its scores are
+        updated tree by tree and copied into self.snapshots after the tree counts listed
+        in `checkpoints`.
+        """
         rng = np.random.default_rng(self.seed)
         p0 = y.mean()
         self.base = float(np.log(p0 / (1 - p0)))
@@ -162,6 +189,7 @@ class GBM:
         return self
 
     def decision(self, B, n_trees=None):
+        """Logit of every row of B, using the first n_trees trees (all by default)."""
         F = np.full(len(B), self.base)
         for levels, leaf in self.trees[: n_trees or len(self.trees)]:
             F += self._apply(B, levels, leaf)
