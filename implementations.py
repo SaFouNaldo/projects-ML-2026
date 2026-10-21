@@ -128,11 +128,8 @@ def mean_squared_error_sgd(y, tx, initial_w, max_iters, gamma):
     w = np.array(initial_w, dtype=float)
     N = len(y)
     for _ in range(max_iters):
-        # Sample a random index
         i = np.random.randint(N)
-        # Compute the gradient on that single datapoint
         grad = compute_mse_gradient(y[i : i + 1], tx[i : i + 1], w)
-        # Update the weights
         w -= gamma * grad
     loss = compute_mse(y, tx, w)
     return w, loss
