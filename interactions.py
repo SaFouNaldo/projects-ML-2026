@@ -19,6 +19,11 @@ def _logreg_irls(
     tol: float = 1e-8,
     bias_idx: int = 0,
 ) -> np.ndarray:
+    """L2-regularised logistic regression fitted with Newton's method (IRLS).
+
+    The bias column `bias_idx` is not penalised. Used to rank the columns by |w|;
+    returns w.
+    """
     d = X.shape[1]
     w = np.zeros(d, dtype=np.float64)
     R = lam * np.eye(d)
@@ -44,6 +49,10 @@ class TopKPairInteractions:
     def __init__(
         self, k: int = 12, lam: float = 1.0, bias_idx: int = 0, scale: bool = True
     ):
+        """k: number of columns whose pairwise products are added; lam: L2 strength of the
+        ranking fit; bias_idx: index of the bias column (never selected); scale:
+        standardise the products.
+        """
         self.k = k
         self.lam = lam
         self.bias_idx = bias_idx
@@ -55,6 +64,11 @@ class TopKPairInteractions:
         self.names_: list[str] = []
 
     def fit(self, X: np.ndarray, y01: np.ndarray) -> "TopKPairInteractions":
+        """Learns which products to add, on the training rows only.
+
+        Ranks the columns by |w| of an IRLS logistic fit, keeps the top k, and learns the
+        mean and standard deviation of their k (k - 1) / 2 pairwise products.
+        """
         w = _logreg_irls(X, y01, lam=self.lam, bias_idx=self.bias_idx)
         score = np.abs(w.copy())
         score[self.bias_idx] = -1.0
@@ -78,12 +92,14 @@ class TopKPairInteractions:
         return self
 
     def _raw_products(self, X: np.ndarray) -> np.ndarray:
+        """Products x_i * x_j for every selected pair (i, j)."""
         if not self.pairs_:
             return np.zeros((len(X), 0), dtype=np.float64)
         cols = [X[:, i] * X[:, j] for i, j in self.pairs_]
         return np.column_stack(cols)
 
     def transform(self, X: np.ndarray) -> np.ndarray:
+        """X with the standardised products appended."""
         assert self.top_idx_ is not None and self.mean_ is not None
         Z = self._raw_products(X)
         if self.scale and Z.shape[1] > 0:
@@ -91,5 +107,6 @@ class TopKPairInteractions:
         return np.hstack([X, Z])
 
     def fit_transform(self, X: np.ndarray, y01: np.ndarray) -> np.ndarray:
+        """fit, then transform, on the same rows."""
         self.fit(X, y01)
         return self.transform(X)

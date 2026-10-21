@@ -114,6 +114,7 @@ NOMINAL = {
 
 
 def load_feature_names(path: Path = FEATURES_PATH) -> list[str]:
+    """Names of the selected raw columns, one per line in `path` (selected_features.txt)."""
     return [ln.strip() for ln in path.read_text().splitlines() if ln.strip()]
 
 
@@ -128,6 +129,7 @@ def load_selected(x_path: Path, names: list[str]) -> np.ndarray:
 
 
 def load_y(y_path: Path) -> np.ndarray:
+    """Labels of y_train.csv (second column) as floats in {-1, 1}."""
     with y_path.open(newline="") as f:
         reader = csv.reader(f)
         next(reader)
@@ -145,6 +147,11 @@ def decode_y(y01: np.ndarray) -> np.ndarray:
 
 
 def _is_dk(name: str, x: float) -> bool:
+    """True if `x` is a "don't know" / "refused" code for column `name`.
+
+    The code depends on the question: 7 / 9, 77 / 99, or 9 / 77 / 99 (see DK_79,
+    DK_7799 and DK_9 above).
+    """
     if name in CONTINUOUS:
         return False
     if name == "_AGE80":
@@ -172,6 +179,11 @@ def recode_alcday5(x: float) -> float:
 
 
 def recode_cell(name: str, raw: str) -> float:
+    """One raw CSV cell -> number.
+
+    Blank or "don't know" / "refused" -> NaN, "none" (88) -> 0 for the day counts,
+    ALCDAY5 -> drinking days per month.
+    """
     if raw is None or str(raw).strip() == "":
         return np.nan
     try:
@@ -188,6 +200,7 @@ def recode_cell(name: str, raw: str) -> float:
 
 
 def recode_matrix(raw: np.ndarray, names: list[str]) -> np.ndarray:
+    """Applies recode_cell to every cell of the string matrix `raw` (columns `names`)."""
     n, d = raw.shape
     out = np.empty((n, d), dtype=np.float64)
     for j, name in enumerate(names):
@@ -197,7 +210,15 @@ def recode_matrix(raw: np.ndarray, names: list[str]) -> np.ndarray:
 
 
 class Preprocessor:
+    """Cleaning and encoding of the selected columns, fitted on the training rows.
+
+    fit_transform learns the imputation values, the one-hot levels and the
+    standardisation on the training rows; transform applies exactly the same
+    operations to new rows (validation or test).
+    """
+
     def __init__(self, names: list[str], add_bias: bool = True):
+        """names: raw columns to encode; add_bias: prepend a column of ones."""
         self.names = names
         self.add_bias = add_bias
         self.medians_: dict[str, float] = {}
@@ -208,6 +229,11 @@ class Preprocessor:
         self.out_names_: list[str] = []
 
     def _impute_col(self, name: str, col: np.ndarray, fit: bool) -> np.ndarray:
+        """Fills the missing values of one column.
+
+        Mode for nominal, yes/no and SEX columns, median otherwise; the value is learned
+        when `fit` is True and reused otherwise.
+        """
         miss = ~np.isfinite(col)
         if name in NOMINAL or name in BINARY_YESNO or name == "SEX":
             if fit:
@@ -243,6 +269,12 @@ class Preprocessor:
     def _to_numeric_cols(
         self, X: np.ndarray, fit: bool
     ) -> tuple[np.ndarray, list[str]]:
+        """Imputed columns -> numeric features, with their names.
+
+        Yes/no columns become 0 / 1, SEX a female indicator, nominal columns one-hot
+        (levels seen in the training rows), fruit and vegetable sums log(1 + x); the
+        other columns are kept as they are.
+        """
         parts = []
         names_out = []
         n = X.shape[0]
@@ -252,7 +284,7 @@ class Preprocessor:
                 parts.append((col == 1).astype(np.float64))
                 names_out.append(name)
             elif name == "SEX":
-                parts.append((col == 2).astype(np.float64))  # 1 = femme
+                parts.append((col == 2).astype(np.float64))  # 1 = female
                 names_out.append("SEX_female")
             elif name in NOMINAL:
                 if fit:
@@ -272,8 +304,13 @@ class Preprocessor:
         return np.column_stack(parts), names_out
 
     def fit_transform(self, raw: np.ndarray) -> np.ndarray:
+        """Fits on the training rows and returns their encoded, standardised matrix.
+
+        Missing indicators are added for MISSING_FLAG_COLS, and the bias column comes
+        first when add_bias is True.
+        """
         X = recode_matrix(raw, self.names)
-        miss_Z, miss_names = self._missing_flags(X)  # avant impute
+        miss_Z, miss_names = self._missing_flags(X)  # before imputation
         Z, names_out = self._to_numeric_cols(X, fit=True)
         if miss_names:
             Z = np.c_[Z, miss_Z]
@@ -289,6 +326,7 @@ class Preprocessor:
         return Z
 
     def transform(self, raw: np.ndarray) -> np.ndarray:
+        """Encodes new rows with the statistics learned by fit_transform."""
         X = recode_matrix(raw, self.names)
         miss_Z, miss_names = self._missing_flags(X)
         Z, _ = self._to_numeric_cols(X, fit=False)
@@ -306,6 +344,10 @@ def build_train_test(
     x_test: Path = DATA / "x_test.csv",
     features_path: Path = FEATURES_PATH,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, Preprocessor]:
+    """Reads the CSV files, keeps the selected columns and fits the Preprocessor on train.
+
+    Returns (tx_train, y in {0, 1}, tx_test, preprocessor).
+    """
     names = load_feature_names(features_path)
     raw_tr = load_selected(x_train, names)
     raw_te = load_selected(x_test, names)

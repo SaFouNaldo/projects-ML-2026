@@ -21,6 +21,12 @@ The logits of the four members are averaged. The decision threshold is the one t
 maximises F1 on the averaged OOF scores (one sort over all rows, research/common.py),
 and it is applied to the averaged test scores.
 
+The column HAREHAB1 is removed before training (DROP_COLUMNS below). It asks about
+cardiac rehabilitation after a heart attack, so it is only answered by positive
+respondents: every training row where it is filled has the label 1. Keeping it would
+let the model read the label (a leak worth about +0.010 F1), which a screening
+model could not do.
+
 Training saves the 20 fold models (4 members x 5 folds), the binning fitted on the
 training rows and the threshold in models/gbm_final.npz. Inference only reads
 x_test.csv and that file.
@@ -77,6 +83,9 @@ CONFIGS = [
     {"tag": "v2s1", "bins": "v2", "trees": 1000, "lr": 0.03, "seed": 1},
     {"tag": "v2s2", "bins": "v2", "trees": 1000, "lr": 0.03, "seed": 2},
 ]
+# Columns removed before training. HAREHAB1 (cardiac rehabilitation "following your
+# heart attack") is only asked to respondents with the positive label: it leaks it.
+DROP_COLUMNS = ["HAREHAB1"]
 # Shared by all members: tree depth, L2 on the leaves, minimum hessian per child,
 # and the share of rows / columns drawn at random for each tree.
 TREE = {"depth": 5, "lam": 1.0, "min_hess": 20.0, "row_sub": 0.5, "col_sub": 0.5}
@@ -112,7 +121,9 @@ def write_submission(ids, test, thr):
 
 # ===================================================================== training
 def member_name(cfg):
-    return f"{cfg['tag']}_{cfg['bins']}_t{cfg['trees']}_s{cfg['seed']}"
+    """Name of the cache files of one member, e.g. d5_v1_t500_s0_noHAREHAB1."""
+    dropped = "".join(f"_no{c}" for c in sorted(DROP_COLUMNS))
+    return f"{cfg['tag']}_{cfg['bins']}_t{cfg['trees']}_s{cfg['seed']}{dropped}"
 
 
 def cross_validated_gbm(cfg, fl, retrain):
@@ -123,7 +134,7 @@ def cross_validated_gbm(cfg, fl, retrain):
     """
     t0 = time.time()
     SCORES.mkdir(parents=True, exist_ok=True)
-    B, BT, y, _ = load_bins(cfg["bins"])
+    B, BT, y, _ = load_bins(cfg["bins"], DROP_COLUMNS)
     oof, test, models = np.zeros(len(y)), np.zeros(len(BT)), []
     for i, (tr, va) in enumerate(fl):
         path = SCORES / f"{member_name(cfg)}_fold{i}.npz"
@@ -157,7 +168,7 @@ def cross_validated_gbm(cfg, fl, retrain):
 
 def train(args):
     """Cross-validated training of the four members, then threshold and saved models."""
-    _, _, y, ids = load_bins("v2")
+    _, _, y, ids = load_bins("v2", DROP_COLUMNS)
     fl = folds(y, k=K_FOLDS)
     print(
         f"train {len(y)} rows ({100 * y.mean():.2f} % positive), test {len(ids)} rows"
@@ -181,9 +192,13 @@ def train(args):
 
     # everything inference needs: binning fitted on the training rows, trees, threshold
     X, _, _, _, hdr = load_raw()
-    saved = {"configs": np.array(json.dumps(CONFIGS)), "threshold": np.array(thr)}
+    saved = {
+        "configs": np.array(json.dumps(CONFIGS)),
+        "dropped_columns": np.array(DROP_COLUMNS),
+        "threshold": np.array(thr),
+    }
     for version in sorted({c["bins"] for c in CONFIGS}):
-        spec = fit_binning(X, hdr, version)
+        spec = fit_binning(X, hdr, version, DROP_COLUMNS)
         saved[f"{version}__columns"] = np.array(spec["columns"])
         saved[f"{version}__edges"] = np.concatenate(spec["edges"])
         saved[f"{version}__edge_counts"] = np.array([len(e) for e in spec["edges"]])
@@ -247,6 +262,7 @@ def inference():
 
 
 def main():
+    """Parses the command line and runs the training or the inference."""
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--mode", choices=["inference", "train"], default="inference")
     ap.add_argument("--configs", nargs="*", help="train mode: members to train")

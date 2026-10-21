@@ -35,7 +35,9 @@ python run.py
 
 **Training (a few hours on a laptop CPU).** Trains the four models from scratch with
 5-fold cross-validation (about 15 000 trees), saves them in `models/gbm_final.npz`,
-then writes the submission.
+then writes the submission. The code that trains these weights is `train` and
+`cross_validated_gbm` in `run.py`, which use the boosting in `research/gbm.py` and the
+binning, folds and F1 threshold in `research/common.py`.
 
 ```
 python run.py --mode train
@@ -67,36 +69,27 @@ python run.py --mode train --configs v2s2
 python run.py --mode train
 ```
 
-What the training prints (laptop CPU, four members in parallel). The F1 values
-are out-of-fold scores of 5-fold cross-validation:
+What the training prints (laptop CPU, four members in parallel, `HAREHAB1`
+removed). The F1 values are out-of-fold scores of 5-fold cross-validation:
 
 | Member | Time per fold | F1 pooled | F1 nested | AUC |
 |---|---|---|---|---|
-| `d5` | about 26 min | 0.4457 | 0.4445 | 0.8691 |
-| `v2ctrl` | about 26 min | 0.4453 | 0.4452 | 0.8692 |
-| `v2s1` | about 53 min (1000 trees) | 0.4458 | 0.4451 | 0.8695 |
-| `v2s2` | about 53 min (1000 trees) | 0.4455 | 0.4449 | 0.8695 |
-| **average of the 4** | (combining: 18 s) | **0.4473** | **0.4463** | **0.8700** |
-
-For example, the `d5` member prints
-
-```
-member {'tag': 'd5', 'bins': 'v1', 'trees': 500, 'lr': 0.05, 'seed': 0}
-  d5: fold 1/5  1487s
-  ...
-  d5: fold 5/5  7809s
-[d5] F1 pooled 0.4457  nested 0.4445  folds 0.4457±0.0015  AUC 0.8691  thr -1.2414
-```
+| `d5` | about 41 min | 0.4364 | 0.4356 | 0.8655 |
+| `v2ctrl` | about 41 min | 0.4370 | 0.4356 | 0.8654 |
+| `v2s1` | about 71 min (1000 trees) | 0.4379 | 0.4371 | 0.8659 |
+| `v2s2` | about 71 min (1000 trees) | 0.4389 | 0.4385 | 0.8659 |
+| **average of the 4** | (combining: about 10 s) | **0.4387** | **0.4375** | **0.8664** |
 
 The combining call ends with
 
 ```
-[average of 4 GBM] F1 pooled 0.4473  nested 0.4463  folds 0.4473±0.0017  AUC 0.8700  thr -1.2289
+[average of 4 GBM] F1 pooled 0.4387  nested 0.4375  folds 0.4387±0.0025  AUC 0.8664  thr -1.3282
 saved the models in models/gbm_final.npz
-wrote submissions/final_submission.csv: threshold -1.2289, 12.24 % predicted positive
+wrote submissions/final_submission.csv: threshold -1.3282, 13.72 % predicted positive
 ```
 
 Inference (`python run.py`, about 5 minutes) writes a byte-identical file.
+This file scores F1 0.450 (accuracy 0.877) on AIcrowd.
 Everything is deterministic (fixed seeds), so training again gives the same models.
 
 ## Repository structure
@@ -158,24 +151,28 @@ level by level with the Newton gain of the log-loss, and missing values go to th
 better side of each split. Four models (depth 5, 500 to 1000 trees, two binnings,
 three seeds) are trained with 5-fold cross-validation, the test score of each is the
 mean of its 5 fold models, and the four logits are averaged with equal weights.
+The column `HAREHAB1` is removed before training (see "Label leak" below).
 
 ## Results (5-fold cross-validation)
 
 | Model | nested F1 |
 |---|---|
-| Linear regression, SGD (`mean_squared_error_sgd`) | 0.4234 |
+| Linear regression, SGD (`mean_squared_error_sgd`) | 0.4233 |
 | Ridge regression (`ridge_regression`) | 0.4254 |
 | Logistic regression (`logistic_regression`) | 0.4276 |
-| Logistic regression on all raw columns, 2 207 encoded columns (`research/cv_wide.py`) | 0.4382 |
-| Gradient boosting, one model (`d5`) | 0.4445 |
-| **Average of 4 gradient-boosting models (`run.py`)** | **0.4463** |
+| Logistic regression on all raw columns, 2 207 encoded columns (`research/cv_wide.py`, sees `HAREHAB1`) | 0.4382 |
+| Gradient boosting, one model (`d5`, without `HAREHAB1`) | 0.4356 |
+| **Average of 4 gradient-boosting models (`run.py`, without `HAREHAB1`)** | **0.4375** |
 
 The six methods are compared on the same matrix and protocol in
 `research/cv_six_methods.py`; they all lie within 0.005 of each other. Choosing the
 threshold matters more than the model: the logistic regression gets F1 0.21 with the
 usual threshold 0.5 and 0.43 with the F1-optimal threshold (about 0.21).
 
-**Label leak.** The question `HAREHAB1` (cardiac rehabilitation) is only asked to
-people who reported a heart attack, so the 773 training rows where it is answered are
-all positive. It is part of the provided data and the trees use it; without this
-column the single gradient-boosting model gets 0.4356 (`research/cv_gbm.py v2noleak`).
+**Label leak.** The question `HAREHAB1` asks about cardiac rehabilitation "following
+your heart attack", so it is only asked to people with the positive label: the 773
+training rows where it is answered are all positive (238 such rows in the test set).
+A model that sees it reads the label, which a screening model could not do, so
+`run.py` removes it (`DROP_COLUMNS`). For comparison, with this column the same four
+models reach nested F1 0.4445 / 0.4452 / 0.4451 / 0.4449, their average 0.4463, and
+that submission scored F1 0.453 on AIcrowd; the leak is worth about +0.010 F1.

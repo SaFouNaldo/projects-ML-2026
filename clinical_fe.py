@@ -57,6 +57,7 @@ NO_DUP_EXTRAS = [
 
 
 def _parse(s: str) -> float:
+    """CSV cell -> float; NaN for blanks and non-numbers."""
     s = s.strip()
     if not s:
         return np.nan
@@ -67,6 +68,10 @@ def _parse(s: str) -> float:
 
 
 def load_raw_matrix(x_path: Path, colnames: list[str]) -> tuple[np.ndarray, list[str]]:
+    """Reads the columns `colnames` present in the CSV file.
+
+    Returns the float matrix and the names of the columns found.
+    """
     with x_path.open(newline="") as f:
         reader = csv.reader(f)
         header = next(reader)
@@ -77,6 +82,7 @@ def load_raw_matrix(x_path: Path, colnames: list[str]) -> tuple[np.ndarray, list
 
 
 def _yesno(v: np.ndarray, yes: float = 1.0, no: float = 2.0) -> np.ndarray:
+    """BRFSS yes / no answer -> 1 / 0; any other code (don't know, refused, blank) -> NaN."""
     out = np.full(v.shape, np.nan, dtype=np.float64)
     out[v == yes] = 1.0
     out[v == no] = 0.0
@@ -88,6 +94,7 @@ def build_nodup_extras(X: np.ndarray, cols: list[str]) -> tuple[np.ndarray, list
     ix = {n: i for i, n in enumerate(cols)}
 
     def c(n: str) -> np.ndarray:
+        """Column `n` of the raw matrix."""
         return X[:, ix[n]]
 
     n = len(X)
@@ -188,6 +195,7 @@ class ClinicalFE:
     """Fit on train (median / mean / std), then transform; NO_DUP extra features only."""
 
     def __init__(self, add_bias: bool = False):
+        """add_bias: prepend a column of ones to the output."""
         self.add_bias = add_bias
         self.colnames_: list[str] | None = None
         self.feat_names_: list[str] = list(NO_DUP_EXTRAS)
@@ -196,6 +204,9 @@ class ClinicalFE:
         self.std_: np.ndarray | None = None
 
     def fit(self, x_path: Path) -> "ClinicalFE":
+        """Builds the 7 extra features on the training file and learns their medians
+        (used for missing values), means and standard deviations.
+        """
         raw, used = load_raw_matrix(x_path, REQUIRED_COLS)
         self.colnames_ = used
         Z, names = build_nodup_extras(raw, used)
@@ -210,6 +221,9 @@ class ClinicalFE:
         return self
 
     def transform(self, x_path: Path) -> np.ndarray:
+        """Builds the 7 extra features for any file, fills missing values with the
+        training medians and standardises them with the training statistics.
+        """
         assert self.colnames_ is not None and self.mean_ is not None
         raw, used = load_raw_matrix(x_path, self.colnames_)
         if used != self.colnames_:
@@ -225,5 +239,6 @@ class ClinicalFE:
         return Z
 
     def fit_transform(self, x_path: Path) -> np.ndarray:
+        """fit, then transform, on the same file."""
         self.fit(x_path)
         return self.transform(x_path)
