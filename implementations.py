@@ -96,7 +96,7 @@ def mean_squared_error_gd(y, tx, initial_w, max_iters, gamma):
     Returns:
         (w, loss): last weight vector of shape (D,) and its MSE (a scalar).
     """
-    w = initial_w
+    w = np.array(initial_w, dtype=float)
     for _ in range(max_iters):
         grad = compute_mse_gradient(y, tx, w)
         w -= gamma * grad
@@ -124,7 +124,8 @@ def mean_squared_error_sgd(y, tx, initial_w, max_iters, gamma):
     Returns:
         (w, loss): last weight vector and its MSE computed on the FULL dataset.
     """
-    w = initial_w
+
+    w = np.array(initial_w, dtype=float)
     N = len(y)
     for _ in range(max_iters):
         # Sample a random index
